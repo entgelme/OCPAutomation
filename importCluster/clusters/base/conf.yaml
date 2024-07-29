@@ -1,0 +1,20 @@
+cluster:
+  name: o1-770912
+  domain: fyre.ibm.com
+  fqdn: o1-770912.fyre.ibm.com
+  environment: test
+  datacenter: europe
+  cloud: fyre
+  region: eu
+  api: https://api.o1-770912.cp.fyre.ibm.com:6443
+
+clusterset:
+  name: mCluster
+
+catalogSource:
+  rh_catalog_version: v4.10
+
+ingress:
+  controller:
+    syslog:
+      address: 
