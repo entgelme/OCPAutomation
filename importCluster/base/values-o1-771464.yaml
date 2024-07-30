@@ -1,0 +1,10 @@
+cluster:
+  name: o1-771464
+  domain: fyre.ibm.com
+  fqdn: o1-771464.fyre.ibm.com
+  environment: test
+  datacenter: europe
+  cloud: fyre
+  region: eu
+  api: https://api.o1-771464.cp.fyre.ibm.com:6443
+
