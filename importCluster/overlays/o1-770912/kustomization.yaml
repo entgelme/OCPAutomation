@@ -8,3 +8,6 @@ commonLabels:
   variant: o1-770912
 metadata:
   name: o1-770912
+
+bases:
+- ../../base
