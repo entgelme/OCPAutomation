@@ -6,3 +6,5 @@ resources:
 namePrefix: o1-770912-
 commonLabels:
   variant: o1-770912
+metadata:
+  name: o1-770912
