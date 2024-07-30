@@ -9,7 +9,7 @@ cluster:
   api: https://api.o1-770912.cp.fyre.ibm.com:6443
 
 clusterset:
-  name: mCluster
+  name: mcluster
 
 catalogSource:
   rh_catalog_version: v4.10
