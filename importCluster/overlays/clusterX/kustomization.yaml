@@ -1,0 +1,7 @@
+namePrefix: clusterX-
+commonLabels:
+  variant: clusterX
+bases:
+- ../../
+patchesStrategicMerge:
+- values.yaml
