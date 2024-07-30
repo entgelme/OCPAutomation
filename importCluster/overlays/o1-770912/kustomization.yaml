@@ -4,8 +4,8 @@ kind: Kustomization
 patches:
 - path: values.yaml
 namePrefix: o1-770912-
-labels:
-  variant: o1-770912
+#labels:
+#-  variant: o1-770912
 metadata:
   name: o1-770912
 
