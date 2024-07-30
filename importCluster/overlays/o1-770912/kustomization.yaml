@@ -1,6 +1,6 @@
-namePrefix: clusterX-
+namePrefix: o1-770912-
 commonLabels:
-  variant: clusterX
+  variant: o1-770912
 bases:
 - ../../
 patchesStrategicMerge:
