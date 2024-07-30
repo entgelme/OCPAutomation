@@ -1,10 +1,10 @@
 cluster:
-  name: clusterX
+  name: o1-770912 
   domain: fyre.ibm.com
-  fqdn: clusterX.fyre.ibm.com
+  fqdn: o1-770912.fyre.ibm.com
   environment: test
   datacenter: europe
   cloud: fyre
   region: eu
-  api: https://api.clusterX.cp.fyre.ibm.com:6443
+  api: https://api.o1-770912.cp.fyre.ibm.com:6443
 
