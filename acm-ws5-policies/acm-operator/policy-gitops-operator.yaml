@@ -23,3 +23,17 @@ spec:
             name: openshift-gitops-operator
             source: redhat-operators
             sourceNamespace: openshift-marketplace
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-gitops-operator
+  namespace: rhacm-policies
+placementRef:
+  name: test-clusters
+  kind: Placement
+  apiGroup: cluster.open-cluster-management.io 
+subjects:
+- name: policy-gitops-operator
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
