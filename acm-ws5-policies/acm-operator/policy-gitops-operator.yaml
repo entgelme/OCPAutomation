@@ -14,7 +14,7 @@ spec:
         spec:
           operatorGroup: 
               name: gitops-opgroup
-              namespace: openshift-gitops
+              namespace: openshift-operators
           versions: 
             - openshift-gitops-operator.v1.13.1
           remediationAction: enforce
