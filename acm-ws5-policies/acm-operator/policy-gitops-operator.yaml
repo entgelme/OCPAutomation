@@ -12,6 +12,7 @@ spec:
         metadata:
           name: install-gitops-install
         spec:
+          operatorGroup: openshift-gitops-operator
           versions: 
             - openshift-gitops-operator.v1.13.1
           remediationAction: enforce
