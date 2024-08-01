@@ -16,7 +16,7 @@ spec:
               name: global-operators
               namespace: openshift-operators
           versions: 
-            - openshift-gitops-operator.v1.13.1
+            - openshift-gitops-operator.v1.13.0
           remediationAction: enforce
           severity: critical
           complianceType: musthave
