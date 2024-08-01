@@ -16,12 +16,12 @@ spec:
               name: global-operators
               namespace: openshift-operators
           versions: 
-            - openshift-gitops-operator.v1.12.4
+            - openshift-gitops-operator.v1.11.7
           remediationAction: enforce
           severity: critical
           complianceType: musthave
           subscription:
-            channel: gitops-1.12
+            channel: gitops-1.11
             installPlanApproval: Automatic
             name: openshift-gitops-operator
             source: redhat-operators
