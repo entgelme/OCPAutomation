@@ -121,22 +121,10 @@ kind: PlacementBinding
 metadata:
   name: binding-policy-odf-operator
 placementRef:
-  apiGroup: apps.open-cluster-management.io
-  kind: PlacementRule
-  name: placement-policy-odf-operator
+  name: test-clusters
+  kind: Placement
+  apiGroup: cluster.open-cluster-management.io 
 subjects:
   - apiGroup: policy.open-cluster-management.io
     kind: Policy
     name: policy-odf-operator
----
-apiVersion: apps.open-cluster-management.io/v1
-kind: PlacementRule
-metadata:
-  name: placement-policy-odf-operator
-spec:
-  clusterSelector:
-    matchExpressions:
-      - key: environment
-        operator: In
-        values:
-          - test
