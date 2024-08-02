@@ -1,0 +1,25 @@
+apiVersion: local.storage.openshift.io/v1
+kind: LocalVolume
+metadata:
+  creationTimestamp: '2024-08-02T14:31:59Z'
+  finalizers:
+    - storage.openshift.com/local-volume-protection
+  generation: 3
+  name: local-volume
+  namespace: openshift-local-storage
+  resourceVersion: '155632'
+  uid: 66ddf0a9-31c0-4eb6-9065-e91e0264edce
+spec:
+  logLevel: Debug
+  managementState: Managed
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: node-role.kubernetes.io/worker
+            operator: Exists
+  storageClassDevices:
+    - devicePaths:
+        - /dev/disk/by-id/ata-crucial
+      fsType: ext4
+      storageClassName: local-block
+      volumeMode: Filesystem
