@@ -1,0 +1,9 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCDExport
+metadata:
+  name: argocd-exportdata
+  labels:
+    example: basic
+spec:
+  argocd: openshift-gitops
+  
