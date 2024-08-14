@@ -14,7 +14,7 @@ spec:
         - key: local-cluster
           operator: In
           values:
-          - true
+          - "true"
   tolerations:
   - key: cluster.open-cluster-management.io/unreachable
     operator: Exists
