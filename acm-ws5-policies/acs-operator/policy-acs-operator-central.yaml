@@ -102,4 +102,17 @@ spec:
                         minReplicas: 2
                         replicas: 3
                     scannerComponent: Enabled
-                    
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-advanced-cluster-security-central
+  namespace: rhacm-policies
+placementRef:
+  name: hub-cluster
+  kind: Placement
+  apiGroup: cluster.open-cluster-management.io 
+subjects:
+- name: policy-advanced-cluster-security-central
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
