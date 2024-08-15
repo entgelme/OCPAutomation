@@ -92,8 +92,12 @@ spec:
                     persistence:
                       persistentVolumeClaim:
                         claimName: stackrox-db
-                        # adjust storage class dependent on your cluster
                         storageClassName: ocs-storagecluster-cephfs
+                    # adjust storage class dependent on your cluster
+                    db:
+                      persistence:
+                        persistentVolumeClaim:
+                          storageClassName: ocs-storagecluster-cephfs
                   egress:
                     connectivityPolicy: Online
                   scanner:
