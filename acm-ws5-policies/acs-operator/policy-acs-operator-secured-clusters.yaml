@@ -102,4 +102,17 @@ spec:
                     collector:
                       collection: EBPF
                       imageFlavor: Regular
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-advanced-managed-cluster-security
+placementRef:
+  name: test-clusters
+  kind: Placement
+  apiGroup: cluster.open-cluster-management.io 
+subjects:
+  - apiGroup: policy.open-cluster-management.io
+    kind: Policy
+    name: policy-advanced-managed-cluster-security
                       
