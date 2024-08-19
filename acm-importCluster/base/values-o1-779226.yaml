@@ -1,10 +1,10 @@
 cluster:
-  name: o1-770912 
+  name: o1-779226 
   domain: fyre.ibm.com
-  fqdn: o1-770912.fyre.ibm.com
+  fqdn: o1-779226.fyre.ibm.com
   environment: test
   datacenter: europe
   cloud: fyre
   region: eu
-  api: https://api.o1-770912.cp.fyre.ibm.com:6443
+  api: https://api.o1-779226.cp.fyre.ibm.com:6443
 
