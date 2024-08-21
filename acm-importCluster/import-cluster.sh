@@ -45,6 +45,7 @@ echo "(Hub) Importing Managed Cluster '"$MC_CLUSTERNAME"'"
 
 #############################################################################################
 echo "(Hub) generate managed-cluster.yaml and auto-import-secret.yaml with these values ..."
+# automatic adds cluster to cluster set mCluster and sets label environment=test
 cat << EOF > managed-cluster.yaml
 apiVersion: cluster.open-cluster-management.io/v1
 kind: ManagedCluster
@@ -53,6 +54,7 @@ metadata:
   labels:
     cloud: auto-detect
     vendor: auto-detect
+    cluster.open-cluster-management.io/clusterset: mcluster
     environment: test
 spec:
   hubAcceptsClient: true
@@ -85,7 +87,19 @@ kind: KlusterletAddonConfig
 metadata:
   name: $MC_CLUSTERNAME
   namespace: $MC_CLUSTERNAME
+  clusterLabels:
+    name: $MC_CLUSTERNAME
+    cloud: auto-detect
+    vendor: auto-detect
+    cluster.open-cluster-management.io/clusterset: mcluster
+    environment: test
 spec:
+  clusterLabels:
+    name: test
+    cloud: auto-detect
+    vendor: auto-detect
+    cluster.open-cluster-management.io/clusterset: mcluster
+    environment: test
   applicationManager:
     enabled: true
   certPolicyController:
