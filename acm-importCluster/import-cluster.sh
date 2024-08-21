@@ -24,6 +24,8 @@ MC_APIURL=https://api.$MC_CLUSTERFQDN:6443
 
 oc login -u $MC_USER -p $MC_PASSWORD --server=$MC_APIURL --insecure-skip-tls-verify=false
 MC_APITOKEN="$(oc whoami --show-token)"
+echo "The managed cluster's API URL is:   "$MC_APIURL
+echo "The managed cluster's API TOKEN is :"$MC_APITOKEN
 
 echo "(Hub) Create namespace with the name of the managed cluster ..."
 
@@ -32,7 +34,7 @@ MC_CLUSTERNAME="$(echo $MC_CLUSTERFQDN | awk '{split($0, a, ".");print a[1]}' )"
 echo "(Hub) Creating namespace "$MC_CLUSTERNAME
 oc new-project $MC_CLUSTERNAME
 
-echo "(Hub) Importing Managed Cluster '"$MC_CLUSTERNAME"' (API: "$MC_APIURL")"
+echo "(Hub) Importing Managed Cluster '"$MC_CLUSTERNAME"'"
 
 #############################################################################################
 echo "(Hub) generate managed-cluster.yaml and auto-import-secret.yaml with these values ..."
@@ -44,6 +46,7 @@ metadata:
   labels:
     cloud: auto-detect
     vendor: auto-detect
+    environment: test
 spec:
   hubAcceptsClient: true
 EOF

@@ -1,18 +1,23 @@
-#!/bin/bash
+#!/bin/bash -x
 # Assumption: the RHACS central is already in place at the hub cluster
 # expect the managed cluster name as parameter
 
 MC_CLUSTERNAME=$1
+MC_APIURL=$2
+MC_APITOKEN=$3
+ROXCTL_ACCESS_TOKEN_FILE=$2
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 4 ]; then
     echo "Illegal number of parameters"
-    echo -e "Usage $0 <MC Name>\n"
+    echo -e "Usage $0 <MC Name> <MS API URL incl. port> <MC API Token> <path-to-roxctl-access-token-file>\n"
     exit
 #elif
 # Check whether REQUESTFILE argument exists
 # if not exit
 fi
 
+MC_CLUSTERNAME="$(echo $MC_APIURL | awk '{split($0, a, "api");print a[2]}' )"
+MC_CLUSTERNAME="$(echo $MC_APIURL | awk '{split($0, a, "api.");print a[2]}' |awk '{split($0, a, ":");print a[1]}' )" && echo $MC_CLUSTERNAME 
 
 echo Setting up the RHACS sensor on cluster $1
 echo -n "Using rocctl v" 
@@ -25,7 +30,7 @@ export ROX_ENDPOINT="$(oc -n stackrox get route central -o jsonpath="{.status.in
 echo "\$ROX_ENDPOINT: "$ROX_ENDPOINT
 
 # Assuming ROX API Token has been generated before and put to the file roxctl-access-token
-export ROX_API_TOKEN="$(cat roxctl-access-token)"
+export ROX_API_TOKEN="$(cat ROXCTL_ACCESS_TOKEN_FILE)"
 
 # Generate cluster_init_bundle
 #roxctl -e "$ROX_ENDPOINT" central init-bundles generate cluster_init_bundle  --output-secrets cluster_init_bundle.yaml
@@ -35,7 +40,10 @@ export ROX_API_TOKEN="$(cat roxctl-access-token)"
 # This patch is a customized solution and extends the ootb installation procedure (for the sake of scripting)
 
 yq  '(. | select(.metadata.name == "sensor.tls") | .stringData.acs-host) = "'$ROX_ENDPOINT'"' cluster_init_bundle.yaml > cluster_init_bundle_adjusted.yaml 
-# with all secured clusters
+
 # first login to secured cluster
-# then: 
-# oc apply -f cluster_init_bundle_adjusted.yaml -n stackrox
+oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=false
+
+# then apply the cluster_init_bundle_adjusted.yaml there
+echo "Applying cluster_init_bundle_adjusted.yaml on cluster '"$MC_CLUSTERNAME"'" 
+oc apply -f cluster_init_bundle_adjusted.yaml -n stackrox
