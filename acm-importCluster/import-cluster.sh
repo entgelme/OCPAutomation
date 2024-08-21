@@ -31,14 +31,12 @@ MC_APITOKEN="$(oc whoami --show-token)"
 echo "The managed cluster's API URL is:   "$MC_APIURL
 echo "The managed cluster's API TOKEN is :"$MC_APITOKEN
 
-echo "(Hub) Create namespace with the name of the managed cluster ..."
-
 # Login to hub cluster and remember this context to
 oc login --token $HUB_APITOKEN --server=$HUB_APIURL --insecure-skip-tls-verify=false
 HUB_CONTEXT="$(oc config current-context)"
 
 MC_CLUSTERNAME="$(echo $MC_CLUSTERFQDN | awk '{split($0, a, ".");print a[1]}' )"
-echo "(Hub) Creating namespace "$MC_CLUSTERNAME
+echo "(Hub) Create namespace with the name of the managed cluster: '"$MC_CLUSTERNAME"'"
 oc new-project $MC_CLUSTERNAME
 
 echo "(Hub) Importing Managed Cluster '"$MC_CLUSTERNAME"'"
@@ -60,7 +58,9 @@ spec:
   hubAcceptsClient: true
 EOF
 oc apply -f managed-cluster.yaml
+# At this point something magic happens in ACM. Beside others a secret named $MC_CLUSTERNAME-import is created. 
 sleep 5
+# The ACM hub now waits for the connection request from the to-be-managed cluster
 
 echo "(Hub) Extract klusterlet-crd.yaml and import.yaml manifests"
 oc get secret $MC_CLUSTERNAME-import -n $MC_CLUSTERNAME -o jsonpath={.data.crds\\.yaml} | base64 --decode > klusterlet-crd.yaml
