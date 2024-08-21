@@ -20,7 +20,7 @@ MC_CLUSTERNAME="$(echo $MC_APIURL | awk '{split($0, a, "api.");print a[2]}' |awk
 
 echo Setting up the RHACS sensor on cluster $MC_CLUSTERNAME
 echo -n "Using rocctl v" 
-roxctl version
+roxctl version 
 
 echo -n "RHACS admin password: "
 oc -n stackrox get secret central-htpasswd -o go-template='{{index .data "password" | base64decode}}' && echo ""
