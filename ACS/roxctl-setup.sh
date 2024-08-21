@@ -31,7 +31,7 @@ echo "\$ROX_ENDPOINT: "$ROX_ENDPOINT
 # Assuming ROX API Token has been generated before and put to the file roxctl-access-token
 export ROX_API_TOKEN="$(cat $ROXCTL_ACCESS_TOKEN_FILE)"
 
-# Generate cluster_init_bundle
+# Generate cluster_init_bundle (uncomment next line, if cluster_init_bundle has not yet been generated on this hub/central)
 #roxctl -e "$ROX_ENDPOINT" central init-bundles generate cluster_init_bundle  --output-secrets cluster_init_bundle.yaml
 
 # Patch acs-host address (running 'central') to sensor.tls 
