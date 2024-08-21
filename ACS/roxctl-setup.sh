@@ -38,7 +38,7 @@ export ROX_API_TOKEN="$(cat $ROXCTL_ACCESS_TOKEN_FILE)"
 # The secured cluster will read it out (see ACM policy 'policy-advanced-managed-cluster-security')
 # This patch is a customized solution and extends the ootb installation procedure (for the sake of scripting)
 
-yq  '(. | select(.metadata.name == "sensor.tls") | .stringData.acs-host) = "'$ROX_ENDPOINT'"' $CLUSTER_INIT_BUNDLE_FILE > cluster_init_bundle_adjusted.yaml 
+yq  '(. | select(.metadata.name == "sensor-tls") | .stringData.acs-host) = "'$ROX_ENDPOINT'"' $CLUSTER_INIT_BUNDLE_FILE > cluster_init_bundle_adjusted.yaml 
 
 # Remember oc context
 CURRENT_CONTEXT="$(oc config current-context)"
