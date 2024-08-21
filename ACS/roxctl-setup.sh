@@ -2,21 +2,19 @@
 # Assumption: the RHACS central is already in place at the hub cluster
 # expect the managed cluster name as parameter
 
-MC_CLUSTERNAME=$1
-MC_APIURL=$2
-MC_APITOKEN=$3
-ROXCTL_ACCESS_TOKEN_FILE=$2
+MC_APIURL=$1
+MC_APITOKEN=$2
+ROXCTL_ACCESS_TOKEN_FILE=$3
 
-if [ "$#" -ne 4 ]; then
+if [ "$#" -ne 3 ]; then
     echo "Illegal number of parameters"
-    echo -e "Usage $0 <MC Name> <MS API URL incl. port> <MC API Token> <path-to-roxctl-access-token-file>\n"
+    echo -e "Usage $0 <MC API URL incl. port> <MC API Token> <path-to-roxctl-access-token-file>\n"
     exit
 #elif
 # Check whether REQUESTFILE argument exists
 # if not exit
 fi
 
-MC_CLUSTERNAME="$(echo $MC_APIURL | awk '{split($0, a, "api");print a[2]}' )"
 MC_CLUSTERNAME="$(echo $MC_APIURL | awk '{split($0, a, "api.");print a[2]}' |awk '{split($0, a, ":");print a[1]}' )" && echo $MC_CLUSTERNAME 
 
 echo Setting up the RHACS sensor on cluster $1
