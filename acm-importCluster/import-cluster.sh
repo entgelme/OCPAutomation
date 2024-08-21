@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# expect MC_USER, pw and cluster name as parameters
+# expect MC_USER, pw and name of the managed cluster as well as API URL and Token of the hub as parameters
 
 MC_USER=$1
 MC_PASSWORD=$2
@@ -8,7 +8,7 @@ MC_CLUSTERFQDN=$3
 HUB_APIURL=$4
 HUB_APITOKEN=$5
 
-if [ "$#" -ne 4 ]; then
+if [ "$#" -ne 5 ]; then
     echo "Illegal number of parameters"
     echo -e "Usage $0 <MC-User> <MC-Password> <MC_Cluster-FQDN> <Hub API URL> <HUB_APITOKEN>\n"
     exit
@@ -31,7 +31,7 @@ oc login --token $HUB_APITOKEN --server=$HUB_APIURL --insecure-skip-tls-verify=f
 MC_CLUSTERNAME="$(echo $MC_CLUSTERFQDN | awk '{split($0, a, ".");print a[2]}' )"
 oc new-project $MC_CLUSTERNAME
 
-echo "Importing cluster '" $MC_CLUSTERNAME "'"
+echo "Importing Managed Cluster '" $MC_CLUSTERNAME "' (API: "$MC_APIURL")"
 
 #############################################################################################
 echo "(Hub) generate managed-cluster.yaml and auto-import-secret.yaml with these values ..."
