@@ -28,10 +28,11 @@ MC_APITOKEN="$(oc whoami --show-token)"
 echo "(Hub) Create namespace with the name of the managed cluster ..."
 
 oc login --token $HUB_APITOKEN --server=$HUB_APIURL --insecure-skip-tls-verify=false
-MC_CLUSTERNAME="$(echo $MC_CLUSTERFQDN | awk '{split($0, a, ".");print a[2]}' )"
+MC_CLUSTERNAME="$(echo $MC_CLUSTERFQDN | awk '{split($0, a, ".");print a[1]}' )"
+echo "(Hub) Creating namespace "$MC_CLUSTERNAME
 oc new-project $MC_CLUSTERNAME
 
-echo "Importing Managed Cluster '" $MC_CLUSTERNAME "' (API: "$MC_APIURL")"
+echo "(Hub) Importing Managed Cluster '"$MC_CLUSTERNAME"' (API: "$MC_APIURL")"
 
 #############################################################################################
 echo "(Hub) generate managed-cluster.yaml and auto-import-secret.yaml with these values ..."
@@ -46,12 +47,15 @@ metadata:
 spec:
   hubAcceptsClient: true
 EOF
+oc apply -f managed-cluster.yaml
+sleep 5
 
+echo "(Hub) Extract klusterlet-crd.yaml and import.yaml manifests"
 oc get secret $MC_CLUSTERNAME-import -n $MC_CLUSTERNAME -o jsonpath={.data.crds\\.yaml} | base64 --decode > klusterlet-crd.yaml
 oc get secret $MC_CLUSTERNAME-import -n $MC_CLUSTERNAME -o jsonpath={.data.import\\.yaml} | base64 --decode > import.yaml
 
 #############################################################################################
-echo "(MC) Apply the extracted manifests on the managed cluster ..."
+echo "(MC) Apply the extracted manifests on the managed cluster '"$MC_CLUSTERNAME" ..."
 oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=false
 oc apply -f klusterlet-crd.yaml
 oc apply -f import.yaml
@@ -81,4 +85,5 @@ spec:
   searchCollector:
     enabled: true
 EOF
+oc apply -f klusterlet-addon-config.yaml
 oc get pod -n open-cluster-management-agent-addon
