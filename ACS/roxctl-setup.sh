@@ -40,9 +40,15 @@ export ROX_API_TOKEN="$(cat $ROXCTL_ACCESS_TOKEN_FILE)"
 
 yq  '(. | select(.metadata.name == "sensor.tls") | .stringData.acs-host) = "'$ROX_ENDPOINT'"' $CLUSTER_INIT_BUNDLE_FILE > cluster_init_bundle_adjusted.yaml 
 
+# Remember oc context
+CURRENT_CONTEXT="$(oc config current-context)"
+
 # first login to secured cluster
 oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=false
 
 # then apply the cluster_init_bundle_adjusted.yaml there
 echo "Applying cluster_init_bundle_adjusted.yaml on cluster '"$MC_CLUSTERNAME"'" 
 oc apply -f cluster_init_bundle_adjusted.yaml -n stackrox
+
+# Switch back to original context
+oc config use-context $CURRENT_CONTEXT

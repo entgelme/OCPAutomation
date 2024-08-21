@@ -23,13 +23,20 @@ echo "Extract Managed Cluster's (MC) API URL and Token ..."
 MC_APIURL=https://api.$MC_CLUSTERFQDN:6443
 
 oc login -u $MC_USER -p $MC_PASSWORD --server=$MC_APIURL --insecure-skip-tls-verify=false
+# Remember oc context for the managed cluster
+MC_CONTEXT="$(oc config current-context)"
+
+# Extract the managed clusters API token
 MC_APITOKEN="$(oc whoami --show-token)"
 echo "The managed cluster's API URL is:   "$MC_APIURL
 echo "The managed cluster's API TOKEN is :"$MC_APITOKEN
 
 echo "(Hub) Create namespace with the name of the managed cluster ..."
 
+# Login to hub cluster and remember this context to
 oc login --token $HUB_APITOKEN --server=$HUB_APIURL --insecure-skip-tls-verify=false
+HUB_CONTEXT="$(oc config current-context)"
+
 MC_CLUSTERNAME="$(echo $MC_CLUSTERFQDN | awk '{split($0, a, ".");print a[1]}' )"
 echo "(Hub) Creating namespace "$MC_CLUSTERNAME
 oc new-project $MC_CLUSTERNAME
@@ -59,13 +66,15 @@ oc get secret $MC_CLUSTERNAME-import -n $MC_CLUSTERNAME -o jsonpath={.data.impor
 
 #############################################################################################
 echo "(MC) Apply the extracted manifests on the managed cluster '"$MC_CLUSTERNAME" ..."
-oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=false
+# Switch back to MC context
+oc config use-context $MC_CONTEXT
 oc apply -f klusterlet-crd.yaml
 oc apply -f import.yaml
 
 #############################################################################################
 echo "(Hub) Check status ..."
-oc login --token $HUB_APITOKEN --server=$HUB_APIURL --insecure-skip-tls-verify=false
+# Switch back to HUB context
+oc config use-context $HUB_CONTEXT
 oc get managedcluster $MC_CLUSTERNAME
 
 #############################################################################################
@@ -90,3 +99,5 @@ spec:
 EOF
 oc apply -f klusterlet-addon-config.yaml
 oc get pod -n open-cluster-management-agent-addon
+
+
