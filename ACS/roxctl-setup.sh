@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # Assumption: the RHACS central is already in place at the hub cluster
 # expect the managed cluster name as parameter
 
