@@ -114,4 +114,10 @@ EOF
 oc apply -f klusterlet-addon-config.yaml
 oc get pod -n open-cluster-management-agent-addon
 
+# Final status
+echo "Wait for cluster to be connected (30 s) ..."
+sleep 30
+oc get managedcluster $MC_CLUSTERNAME
+
+
 
