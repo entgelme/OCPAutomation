@@ -84,8 +84,8 @@ spec:
                 apiVersion: local.storage.openshift.io/v1alpha1
                 kind: LocalVolumeSet
                 metadata:
-                name: local-block
-                namespace: openshift-local-storage
+                  name: local-block
+                  namespace: openshift-local-storage
                 spec:
                   nodeSelector:
                     nodeSelectorTerms:
