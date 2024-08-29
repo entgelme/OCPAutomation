@@ -76,7 +76,7 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: policy-LocalVolumeSet
+          name: policy-localvolumeset
         spec:
           object-templates:
             - complianceType: musthave
