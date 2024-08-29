@@ -87,20 +87,18 @@ spec:
                   name: local-block
                   namespace: openshift-local-storage
                 spec:
+                  deviceInclusionSpec:
+                    deviceTypes:
+                    - disk
+                    minSize: 10G
+                  maxDeviceCount: 1
                   nodeSelector:
                     nodeSelectorTerms:
-                      - matchExpressions:
-                          - key: node-role.kubernetes.io/worker
-                            operator: Exists
+                    - matchExpressions:
+                      - key: node-role.kubernetes.io/worker
+                        operator: Exists
                   storageClassName: local-block
                   volumeMode: Block
-                  fstype: ext4
-                  maxDeviceCount: 1  # <-- Maximum number of devices per node to be used
-                  deviceInclusionSpec:
-                  deviceTypes:
-                  - disk
-                  - part   # <-- Remove this if not using partitions
-                  minSize: 100Gi   # <-- Uncomment and modify to limit the minimum size of disk used
           remediationAction: enforce
           severity: low
 ---
