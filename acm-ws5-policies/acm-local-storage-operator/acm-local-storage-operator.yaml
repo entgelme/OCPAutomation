@@ -50,6 +50,31 @@ spec:
                   sourceNamespace: openshift-marketplace
           remediationAction: enforce
           severity: low
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-auto-discover-device
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: List
+                items:
+                - apiVersion: local.storage.openshift.io/v1alpha1
+                  kind: LocalVolumeDiscovery
+                  metadata:
+                    name: auto-discover-devices
+                    namespace: openshift-local-storage
+                  spec:
+                    nodeSelector:
+                      nodeSelectorTerms:
+                        - matchExpressions:
+                            - key: node-role.kubernetes.io/worker
+                              operator: Exists
+          remediationAction: enforce
+          severity: low
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding

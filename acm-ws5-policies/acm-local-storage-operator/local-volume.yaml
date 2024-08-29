@@ -7,8 +7,6 @@ metadata:
   generation: 3
   name: local-volume
   namespace: openshift-local-storage
-  resourceVersion: '155632'
-  uid: 66ddf0a9-31c0-4eb6-9065-e91e0264edce
 spec:
   logLevel: Debug
   managementState: Managed
