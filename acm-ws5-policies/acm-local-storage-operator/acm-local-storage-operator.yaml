@@ -72,6 +72,37 @@ spec:
                             operator: Exists
           remediationAction: enforce
           severity: low
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-LocalVolumeSet
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: local.storage.openshift.io/v1alpha1
+                kind: LocalVolumeSet
+                metadata:
+                name: local-block
+                namespace: openshift-local-storage
+                spec:
+                  nodeSelector:
+                    nodeSelectorTerms:
+                      - matchExpressions:
+                          - key: node-role.kubernetes.io/worker
+                            operator: Exists
+                  storageClassName: local-block
+                  volumeMode: Block
+                  fstype: ext4
+                  maxDeviceCount: 1  # <-- Maximum number of devices per node to be used
+                  deviceInclusionSpec:
+                  deviceTypes:
+                  - disk
+                  - part   # <-- Remove this if not using partitions
+                  minSize: 100Gi   # <-- Uncomment and modify to limit the minimum size of disk used
+          remediationAction: enforce
+          severity: low
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
