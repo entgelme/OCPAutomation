@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # expect MC_USER, pw and name of the managed cluster as well as API URL and Token of the hub as parameters
 
@@ -22,7 +22,7 @@ echo "Extract Managed Cluster's (MC) API URL and Token ..."
 
 MC_APIURL=https://api.$MC_CLUSTERFQDN:6443
 
-oc login -u $MC_USER -p $MC_PASSWORD --server=$MC_APIURL --insecure-skip-tls-verify=true
+oc login -u $MC_USER -p $MC_PASSWORD --server=$MC_APIURL --insecure-skip-tls-verify=true |grep Login
 # Remember oc context for the managed cluster
 MC_CONTEXT="$(oc config current-context)"
 
@@ -32,7 +32,7 @@ echo "The managed cluster's API URL is:   "$MC_APIURL
 echo "The managed cluster's API TOKEN is :"$MC_APITOKEN
 
 # Login to hub cluster and remember this context to
-oc login --token $HUB_APITOKEN --server=$HUB_APIURL --insecure-skip-tls-verify=true
+oc login --token $HUB_APITOKEN --server=$HUB_APIURL --insecure-skip-tls-verify=true |grep Logged
 HUB_CONTEXT="$(oc config current-context)"
 
 MC_CLUSTERNAME="$(echo $MC_CLUSTERFQDN | awk '{split($0, a, ".");print a[1]}' )"
