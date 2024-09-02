@@ -19,6 +19,8 @@ fi
 MC_CLUSTERNAME="$(echo $MC_APIURL | awk '{split($0, a, "api.");print a[2]}' |awk '{split($0, a, ":");print a[1]}' )" && echo $MC_CLUSTERNAME 
 
 echo Setting up the RHACS sensor on cluster $MC_CLUSTERNAME
+echo "Assuming, you are already logged in to the Hub Cluster"
+oc cluster-info
 echo -n "Using rocctl v" 
 roxctl version 
 
@@ -44,7 +46,7 @@ yq  '(. | select(.metadata.name == "sensor-tls") | .stringData.acs-host) = "'$RO
 CURRENT_CONTEXT="$(oc config current-context)"
 
 # first login to secured cluster
-oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=false
+oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=false|grep Logged
 
 # then apply the cluster_init_bundle_adjusted.yaml there
 echo "Applying cluster_init_bundle_adjusted.yaml on cluster '"$MC_CLUSTERNAME"'" 
