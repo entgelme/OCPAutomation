@@ -11,9 +11,6 @@ if [ "$#" -ne 4 ]; then
     echo "Illegal number of parameters"
     echo -e "Usage $0 <MC API URL incl. port> <MC API Token> <path-to-roxctl-access-token-file> <cluster init bundle file>\n"
     exit
-#elif
-# Check whether REQUESTFILE argument exists
-# if not exit
 fi
 
 MC_CLUSTERNAME="$(echo $MC_APIURL | awk '{split($0, a, "api.");print a[2]}' |awk '{split($0, a, ":");print a[1]}' )" && echo $MC_CLUSTERNAME 

@@ -37,7 +37,7 @@ HUB_CONTEXT="$(oc config current-context)"
 
 MC_CLUSTERNAME="$(echo $MC_CLUSTERFQDN | awk '{split($0, a, ".");print a[1]}' )"
 echo "(Hub) Create namespace with the name of the managed cluster: '"$MC_CLUSTERNAME"'"
-oc new-project $MC_CLUSTERNAME
+oc new-project $MC_CLUSTERNAME | grep "Now using project"
 
 echo "(Hub) Importing Managed Cluster '"$MC_CLUSTERNAME"'"
 
