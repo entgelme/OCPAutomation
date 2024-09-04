@@ -26,19 +26,19 @@ spec:
                 kind: Namespace
                 metadata:
                   name: openshift-storage
-          remediationAction: inform
-          severity: high
+          remediationAction: enforce
+          severity: low
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1beta1
         kind: OperatorPolicy
         metadata:
           name: odf-operator
         spec:
-          remediationAction: inform
-          severity: high
+          remediationAction: enforce
+          severity: low
           complianceType: musthave
           operatorGroup:
-            name: openshift-storage
+            name: openshift-storage-operatorgroup
             namespace: openshift-storage
             targetNamespaces:
               - openshift-storage
@@ -47,7 +47,7 @@ spec:
             namespace: openshift-storage
             installPlanApproval: Automatic
             source: redhat-operators
-            sourceNamespace: openshift-marketplace
+            sourceNamespace: openshift-marketplace     
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy

@@ -17,7 +17,7 @@ MC_CLUSTERNAME="$(echo $MC_APIURL | awk '{split($0, a, "api.");print a[2]}' |awk
 
 echo Setting up the RHACS sensor on cluster $MC_CLUSTERNAME
 echo "Assuming, you are already logged in to the Hub Cluster"
-oc cluster-info
+oc cluster-info | grep Kubernetes
 echo -n "Using rocctl v" 
 roxctl version 
 
