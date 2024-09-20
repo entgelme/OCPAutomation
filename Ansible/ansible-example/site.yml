@@ -1,0 +1,48 @@
+---
+- name: Install and start Apache
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Filter and return only selected facts
+      ansible.builtin.setup:
+        filter:
+          - 'os_family'
+          - 'ansible_distribution'
+    - name: Ensure the httpd package is installed
+      ansible.builtin.package:
+        name: "{{ package_name }}"
+        state: present
+      when: ansible_facts['os_family'] == "RedHat"
+    - name: Start the httpd service if needed
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: Deploy custom index.html
+      ansible.builtin.template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+        mode: "0644"
+      notify:
+        - Restart apache
+    - name: Perform a health check on the website
+      ansible.builtin.uri:
+        url: http://35.175.115.51/
+        return_content: true
+      register: http_response
+      ignore_errors: true
+
+    - name: Notify if the website is not available
+      ansible.builtin.debug:
+        msg: "Health check failed. Please investigate."
+      when:
+        - http_response.status is not defined or
+          http_response.status != 200
+
+
+  handlers:
+    - name: Restart apache
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
