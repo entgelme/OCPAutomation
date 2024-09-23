@@ -4,11 +4,11 @@
   become: true
 
   tasks:
-    - name: Filter and return only selected facts
-      ansible.builtin.setup:
-        filter:
-          - 'os_family'
-          - 'ansible_distribution'
+    # - name: Filter and return only selected facts
+    #   ansible.builtin.setup:
+    #     filter:
+    #       - 'os_family'
+    #       - 'ansible_distribution'
     - name: Ensure the httpd package is installed
       ansible.builtin.package:
         name: "{{ package_name }}"
