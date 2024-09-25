@@ -1,6 +1,7 @@
 ---
 - name: Install and start Apache
   hosts: webserver
+#   hosts: all
   become: true
 
   tasks:
@@ -9,21 +10,30 @@
     #     filter:
     #       - 'os_family'
     #       - 'ansible_distribution'
+    - name: Display the config
+      debug:
+        msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
+
     - name: Ensure the httpd package is installed
       ansible.builtin.package:
         name: "{{ package_name }}"
         state: present
       when: ansible_facts['os_family'] == "RedHat"
+#       when: inventory_hostname in groups['webserver']
+
     - name: Start the httpd service if needed
       ansible.builtin.service:
         name: httpd
         state: started
         enabled: true
+#       when: inventory_hostname in groups['webserver']
+
     - name: Deploy custom index.html
       ansible.builtin.template:
         src: index.html.j2
         dest: /var/www/html/index.html
         mode: "0644"
+#       when: inventory_hostname in groups['webserver']
       notify:
         - Restart apache
     - name: Perform a health check on the website
@@ -39,6 +49,7 @@
       when:
         - http_response.status is not defined or
           http_response.status != 200
+#       when: inventory_hostname in groups['webserver']
 
 
   handlers:
@@ -46,3 +57,4 @@
       ansible.builtin.service:
         name: httpd
         state: restarted
+
