@@ -5,7 +5,7 @@
   become: true
 
   vars_files:
-    - web.yml
+    - group_vars/web.yml
 
   vars:
     - test: "Hallo"
