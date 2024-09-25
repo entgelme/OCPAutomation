@@ -4,19 +4,21 @@
 #   hosts: all
   become: true
 
+  vars_files:
+    - web.yml
+
+  vars:
+    - test: "Hallo"
+
   tasks:
     # - name: Filter and return only selected facts
     #   ansible.builtin.setup:
     #     filter:
     #       - 'os_family'
     #       - 'ansible_distribution'
-    - name: Get config for VyOS devices
-      vyos.vyos.vyos_facts:
-        gather_subset: all
-        
     - name: Display the config
       debug:
-        msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
+        msg: "Ich sag mal {{ test }}"
 
     - name: Ensure the httpd package is installed
       ansible.builtin.package:
