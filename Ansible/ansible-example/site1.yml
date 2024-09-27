@@ -1,0 +1,28 @@
+---
+- name: Install and start Apache
+  hosts: webserver
+#   hosts: all
+  become: true
+
+  vars_files:
+    - group_vars/web.yml
+
+  vars:
+    - test: "Hallo"
+
+  tasks:
+    # - name: Filter and return only selected facts
+    #   ansible.builtin.setup:
+    #     filter:
+    #       - 'os_family'
+    #       - 'ansible_distribution'
+    - name: Display the config
+      debug:
+        msg: "Ich sag mal {{ test }}"
+
+    - name: Create a k8s namespace
+      k8s:
+        name: testing
+        api_version: v1
+        kind: Namespace
+        state: present

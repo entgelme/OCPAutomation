@@ -20,19 +20,6 @@
       debug:
         msg: "Ich sag mal {{ test }}"
 
-    - name: Create a k8s namespace
-      k8s:
-        name: testing
-        api_version: v1
-        kind: Namespace
-        state: present
-
-    - name: try Openshift
-      ansible.openshift:
-        name: "{{ packaxsge_name }}"
-        state: present
-      when: ansible_facts['os_family'] == "RedHat"
-
     - name: Ensure the httpd package is installed
       ansible.builtin.package:
         name: "{{ package_name }}"
