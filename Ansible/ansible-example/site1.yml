@@ -1,6 +1,6 @@
 ---
 - name: Configure OCP
-  hosts: localhost
+  hosts: bastion
   become: true
 
   vars_files:
