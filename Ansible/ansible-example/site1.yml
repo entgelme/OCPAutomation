@@ -14,6 +14,10 @@
       debug:
         msg: "Ich sag mal {{ test }}"
 
+    - name: test shell command
+      shell: echo "This command runs on "$(hostname)
+ 
+
     - name: Create a k8s namespace
       k8s:
         name: testing
