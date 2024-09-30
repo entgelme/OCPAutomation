@@ -13,6 +13,7 @@
     - name: Display the config
       debug:
         msg: "Ich sag mal {{ test }}"
+        msg: "Das ocpw lautet {{ ocpw }}"
 
     - name: test shell command
       shell: echo "This command runs on "$(hostname)
