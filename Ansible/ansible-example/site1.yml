@@ -10,7 +10,7 @@
     - test: "Hallo"
 
   tasks:
-    - name: Display the config
+    - name: Greetings
       debug:
         msg: "Ich sag mal {{ test }}"
         msg: "Das ocpw lautet {{ ocpw }}"
@@ -23,7 +23,7 @@
         msg: "'{{ lookup('ansible.builtin.env', 'HOME') }}' is the HOME environment variable."
 
     - name: Login to Hub cluster
-      shell: oc login -u kubeadmin -p 
+      shell: oc login -u kubeadmin -p "{{ ocpw }}" --server=https://{{ OCP_API }}:6443 --insecure-skip-tls-verify=true
 
     - name: Create a k8s namespace
       k8s:

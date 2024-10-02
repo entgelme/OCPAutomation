@@ -1,1 +1,2 @@
 ocpw: "{{ vault_ocpw }}"
+ocp_api: "api.cp4bamig1k.cp.fyre.ibm.com"
