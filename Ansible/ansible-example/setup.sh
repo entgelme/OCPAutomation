@@ -16,4 +16,4 @@ echo "Please enter the key/value pair for 'vault_ocpw: ...'" in the following ed
 rm group_vars/bastion/vault
 ansible-vault create group_vars/bastion/vault
 
-echo "Done!"
+echo "Done!" 
