@@ -11,7 +11,7 @@ echo "Setting up a new Ansible Vault ..."
 read -p "Enter the password for the new Ansible Vault: " password
 export VAULT_PASSWORD=password
 
-echo "Please enter the key/value pair for 'vault_ocpw: ...'" in the following editor" 
+echo "Please enter the key/value pair for 'vault_ocpw: ...' in the following editor" 
 
 rm group_vars/bastion/vault
 ansible-vault create group_vars/bastion/vault
