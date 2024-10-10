@@ -1,7 +1,11 @@
 ---
 - name: Configure OCP
   hosts: bastion
-  become: true
+  module_defaults:
+  redhat.openshift.openshift:
+    host: https://{{ ocp_api }}:6443
+#    ca_cert: ca.pem
+#  become: true
 
   vars_files:
     - group_vars/web.yml
@@ -25,9 +29,15 @@
     - name: Login to Hub cluster
       shell: oc login -u kubeadmin -p {{ ocpw }} --server=https://{{ ocp_api }}:6443 --insecure-skip-tls-verify=true
 
+    - name: Log in (obtain access token)
+      redhat.openshift.openshift_auth:
+        username: kubeadmin
+        password: "{{ ocpw }}"
+      register: openshift_auth_results
+
     - name: Create a k8s namespace
       k8s:
-        name: testing
+        name: openshift-gitops-operator
         api_version: v1
         kind: Namespace
         state: present
