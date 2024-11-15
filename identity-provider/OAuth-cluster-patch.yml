@@ -1,0 +1,8 @@
+spec:
+  identityProviders:
+  - htpasswd:
+      fileData:
+        name: localusers
+    mappingMethod: claim
+    name: local-users
+    type: HTPasswd
