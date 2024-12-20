@@ -48,5 +48,5 @@
         resource_definition:
           metadata:
             labels: 
-              openshift.io/cluster-monitoring: true
+              openshift.io/cluster-monitoring: "true"
  
