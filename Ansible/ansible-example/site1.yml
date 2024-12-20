@@ -46,6 +46,7 @@
         api_version: v1
         kind: Namespace
         resource_definition:
-          labels: 
-            openshift.io/cluster-monitoring=true
+          metadata:
+            labels: 
+              openshift.io/cluster-monitoring=true
  
