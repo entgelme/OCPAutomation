@@ -44,4 +44,7 @@
         name: openshift-gitops-operator
         api_version: v1
         kind: Namespace
+        label: 
+          openshift.io/cluster-monitoring=true
         state: present
+
