@@ -7,7 +7,7 @@
 #  redhat.openshift.openshift:
 #    host: https://{{ ocp_api }}:6443
 #    ca_cert: ca.pem       
-  become: true
+#  become: true
 
   vars_files:
     - group_vars/web.yml
