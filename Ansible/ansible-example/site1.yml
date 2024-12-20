@@ -33,8 +33,8 @@
 
     - name: Log in (obtain access token)
       redhat.openshift.openshift_auth:
-        host: {{ ocp_api_url }}
-        username: kubeadmin
+        host: "{{ ocp_api_url }}"
+        username: "kubeadmin"
         password: "{{ ocpw }}"
       register: openshift_auth_results
 
