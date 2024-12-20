@@ -29,10 +29,11 @@
         msg: "'{{ lookup('ansible.builtin.env', 'HOME') }}' is the HOME environment variable."
 
     - name: Login to Hub cluster
-      shell: oc login -u kubeadmin -p {{ ocpw }} --server=https://{{ ocp_api }}:6443 --insecure-skip-tls-verify=true
+      shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
 
     - name: Log in (obtain access token)
       redhat.openshift.openshift_auth:
+        host: {{ ocp_api_url }}
         username: kubeadmin
         password: "{{ ocpw }}"
       register: openshift_auth_results
