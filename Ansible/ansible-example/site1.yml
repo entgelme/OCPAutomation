@@ -36,6 +36,7 @@
         host: "{{ ocp_api_url }}"
         username: "kubeadmin"
         password: "{{ ocpw }}"
+        validate_certs: false
       register: openshift_auth_results
 
     - name: Create a k8s namespace
