@@ -41,10 +41,11 @@
 
     - name: Create a k8s namespace
       k8s:
-        name: openshift-gitops-operator
+       state: present
+       name: openshift-gitops-operator
         api_version: v1
         kind: Namespace
-        labels: 
-          openshift.io/cluster-monitoring=true
-        state: present
-
+        resource_definition:
+          labels: 
+            openshift.io/cluster-monitoring=true
+ 
