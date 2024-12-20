@@ -2,7 +2,7 @@
 - name: Configure OCP
   hosts: bastion
   connection: local
-  gather_facts: true
+  gather_facts: false
   module_defaults:
 #  redhat.openshift.openshift:
 #    host: https://{{ ocp_api }}:6443
