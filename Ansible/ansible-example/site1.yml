@@ -68,8 +68,6 @@
         namespace: openshift-gitops 
         field_selectors:
           - status.phase=Running
-        validate:
-          fail_on_error: yes
 # Verify that the pods in the openshift-gitops-operator namespace are running: 
 # ... (oc get pods -n openshift-gitops-operator)
 
