@@ -62,12 +62,18 @@
 
 # verify that all the pods in the openshift-gitops namespace are running
 # ... (oc get pods -n openshift-gitops)
-    - name: Search for all running pods
+    - name: Wait for all pods running
       kubernetes.core.k8s_info:
         kind: Pod
         namespace: openshift-gitops 
-        field_selectors:
-          - status.phase=Running
+      register: pod_list
+      until: pod_list|json_query('resources[*].status.phase')|unique == ["Running"]
+
+    # das isses noch nicht ganz. Wir wollen eigentlich wissen, ob 
+    #    a) ein Rudel Pods erzeugt wurde
+    # und
+    #    b) alle in "phase": "Running" sind
+
 # Verify that the pods in the openshift-gitops-operator namespace are running: 
 # ... (oc get pods -n openshift-gitops-operator)
 
