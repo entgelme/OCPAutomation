@@ -1,3 +1,3 @@
 ocpw: "{{ vault_ocpw }}"
-ocp_api: "api.o1-830580.cp.fyre.ibm.com"
+ocp_api: "api.o1-834659.cp.fyre.ibm.com"
 ocp_api_url: "https://{{ ocp_api }}:6443"
