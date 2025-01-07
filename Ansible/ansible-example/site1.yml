@@ -49,4 +49,28 @@
           metadata:
             labels: 
               openshift.io/cluster-monitoring: "true"
- 
+
+    - name: Create an Operator group for gitops 
+      kubernetes.core.k8s:
+        state: present
+        src: ./files/gitops-operatorgroup.yml
+
+    - name: Create a subscription for the gitops operator
+      kubernetes.core.k8s:
+        state: present
+        src: ./files/openshift-gitops-sub.yml
+
+# verify that all the pods in the openshift-gitops namespace are running
+# ... (oc get pods -n openshift-gitops)
+    - name: Search for all running pods
+      kubernetes.core.k8s_info:
+        kind: Pod
+        namespace: openshift-gitops 
+        field_selectors:
+          - status.phase=Running
+        validate:
+          fail_on_error: yes
+# Verify that the pods in the openshift-gitops-operator namespace are running: 
+# ... (oc get pods -n openshift-gitops-operator)
+
+# 
