@@ -18,4 +18,11 @@ sleep 3
 rm group_vars/bastion/vault
 ansible-vault create group_vars/bastion/vault
 
+# Install python modules
+# pip install jmespath
+# better: as root: dnf install python3-jmespath
+
+# Install ansible modules
+ansible-galaxy collection install kubernetes.core
+
 echo "Done!" 
