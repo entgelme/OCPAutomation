@@ -51,6 +51,9 @@ ansible-navigator:
 #   exec:
 #     shell: False
 #     command: /bin/foo
+  exec:
+    shell: true
+    command: ls -l ~/ansible/.vault_pass
 #
   execution-environment:
 #     container-engine: podman
