@@ -13,7 +13,7 @@
     - group_vars/web.yml
 
   vars:
-    - test: "Hallo"
+    test: "Hallo"
 
   tasks:
     - name: Greetings
