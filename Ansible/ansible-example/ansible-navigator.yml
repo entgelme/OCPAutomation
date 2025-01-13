@@ -74,7 +74,7 @@ ansible-navigator:
 #       policy: never
     volume-mounts:
       - src: "~/ansible"
-        dest: "/home/runner/ansible"
+        dest: "/root/ansible"
         options: "Z"
 #     volume-mounts:
 #       - src: "/tmp"
