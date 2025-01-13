@@ -52,7 +52,7 @@ ansible-navigator:
 #     shell: False
 #     command: /bin/foo
 #
-#   execution-environment:
+  execution-environment:
 #     container-engine: podman
 #     enabled: False
 #     environment-variables:
