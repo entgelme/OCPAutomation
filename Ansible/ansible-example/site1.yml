@@ -83,4 +83,24 @@
       register: pod_list2
       until: pod_list2|json_query('resources[*].status.phase')|unique == ["Running"]
 
-# Establish ArgoCD application(s) 
+# Establish ArgoCD application(s): acm-hub
+# Create namespace acm-hub
+    - name: Create namespace acm-hub
+      k8s:
+        state: present
+        name: acm-hub
+        api_version: v1
+        kind: Namespace
+        resource_definition:
+          metadata:
+            labels: 
+              openshift.io/cluster-monitoring: "true"
+
+# Extend permissions for service account openshift-gitops-argocd-application-controller
+# ?
+
+# Apply gitops-applicationset
+    - name: Create an Operator group for gitops 
+      kubernetes.core.k8s:
+        state: present
+        src: ./files/gitops-applicationset.yml
