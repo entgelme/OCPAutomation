@@ -3,4 +3,6 @@ kind: MultiClusterHub
 metadata:
   name: multiclusterhub
   namespace: acm-hub
+  labels:
+    app.kubernetes.io/instance: acm-hub-install
 spec: {}
