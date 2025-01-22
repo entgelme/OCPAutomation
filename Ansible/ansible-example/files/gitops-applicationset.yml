@@ -21,7 +21,7 @@ spec:
     metadata:
       name: '{{.cluster}}-install'
     spec:
-      project: acm-hub
+      project: default
       source:
         repoURL: https://github.com/entgelme/OCPAutomation.git
         targetRevision: HEAD
