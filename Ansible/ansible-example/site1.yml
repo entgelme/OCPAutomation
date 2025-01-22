@@ -62,12 +62,12 @@
 
 # verify that all the pods in the openshift-gitops namespace are running
 # ... (oc get pods -n openshift-gitops)
-    - name: Wait for all pods running
+    - name: Wait for all pods running in openshift-gitops
       kubernetes.core.k8s_info:
         kind: Pod
         namespace: openshift-gitops 
-      register: pod_list
-      until: pod_list|json_query('resources[*].status.phase')|unique == ["Running"]
+      register: pod_list1
+      until: pod_list1|json_query('resources[*].status.phase')|unique == ["Running"]
 
     # das isses noch nicht ganz. Wir wollen eigentlich wissen, ob 
     #    a) ein Rudel Pods erzeugt wurde
@@ -76,5 +76,11 @@
 
 # Verify that the pods in the openshift-gitops-operator namespace are running: 
 # ... (oc get pods -n openshift-gitops-operator)
+    - name: Wait for all pods running in openshift-gitops-operator
+      kubernetes.core.k8s_info:
+        kind: Pod
+        namespace: openshift-gitops-operator 
+      register: pod_list2
+      until: pod_list2|json_query('resources[*].status.phase')|unique == ["Running"]
 
-# 
+# Establish ArgoCD application(s) 

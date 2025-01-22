@@ -23,7 +23,7 @@ ansible-vault create group_vars/bastion/vault
 # better: as root: dnf install python3-jmespath
 
 # Install ansible modules
-ansible-galaxy collection install kubernetes.core redhat.openshift community.okd --ignore-certs
+ansible-galaxy collection install kubernetes.core redhat.openshift community.okd community.general --ignore-certs
 
 echo "Done!" 
 echo -e "Start playbook with:\nVAULT_PASSWORD="$VAULT_PASSWORD" ansible-playbook -v -i inventory/hosts.yml site1.yml " 

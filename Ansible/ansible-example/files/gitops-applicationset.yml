@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: Initial-gitops-apps
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - cluster: acm-hub
+        url: https://kubernetes.default.svc
+#        url: https://api.o1-840882.cp.fyre.ibm.com
+#        url: https://api.aehub1.cp.fyre.ibm.com
+#      - cluster: engineering-prod
+#        url: https://2.4.6.8
+#      - cluster: finance-preprod
+#        url: https://9.8.7.6
+  template:
+    metadata:
+      name: '{{.cluster}}-guestbook'
+    spec:
+      project: Initial-gitops-apps
+      source:
+        repoURL: https://github.com/entgelme/OCPAutomation.git
+        targetRevision: HEAD
+        path: Install/{{.cluster}}/
+      destination:
+        server: '{{.url}}'
+        namespace: openshift-acm
