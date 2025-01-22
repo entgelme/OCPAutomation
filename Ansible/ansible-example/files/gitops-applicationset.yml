@@ -21,11 +21,11 @@ spec:
     metadata:
       name: '{{.cluster}}-install'
     spec:
-      project: openshift-acm
+      project: acm-hub
       source:
         repoURL: https://github.com/entgelme/OCPAutomation.git
         targetRevision: HEAD
         path: Install/{{.cluster}}/
       destination:
         server: '{{.url}}'
-        namespace: openshift-acm
+        namespace: acm-hub
