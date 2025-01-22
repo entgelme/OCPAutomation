@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: Initial-gitops-apps
+  name: initial-gitops-apps
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -18,9 +18,9 @@ spec:
 #        url: https://9.8.7.6
   template:
     metadata:
-      name: '{{.cluster}}-guestbook'
+      name: '{{.cluster}}-install'
     spec:
-      project: Initial-gitops-apps
+      project: openshift-acm
       source:
         repoURL: https://github.com/entgelme/OCPAutomation.git
         targetRevision: HEAD
