@@ -99,7 +99,9 @@
               openshift.io/cluster-monitoring: "true"
 
 # Extend permissions for service account openshift-gitops-argocd-application-controller
-# ?
+# oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n <namespace>
+    - name: Extend permissions for service account openshift-gitops-argocd-application-controller
+      shell: oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n acm-hub
 
 # Apply gitops-applicationset
     - name: Apply gitops-applicationset to deploy ACM 
