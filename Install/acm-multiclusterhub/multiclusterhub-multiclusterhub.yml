@@ -5,6 +5,4 @@ metadata:
   namespace: acm-hub
   labels:
     app.kubernetes.io/instance: acm-hub-install
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"    
 spec: {}
