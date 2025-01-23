@@ -1,3 +1,4 @@
+clustername: "o1-841003"
 ocpw: "{{ vault_ocpw }}"
-ocp_api: "api.o1-840882.cp.fyre.ibm.com"
+ocp_api: "api.{{ clustername }}.cp.fyre.ibm.com"
 ocp_api_url: "https://{{ ocp_api }}:6443"
