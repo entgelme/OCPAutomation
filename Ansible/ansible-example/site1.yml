@@ -90,7 +90,7 @@
     - name: Create namespace acm-hub
       k8s:
         state: present
-        name: acm-hub
+        name: acm-hubx
         api_version: v1
         kind: Namespace
         resource_definition:
@@ -101,7 +101,7 @@
 # Extend permissions for service account openshift-gitops-argocd-application-controller
 # oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n <namespace>
     - name: Extend permissions for service account openshift-gitops-argocd-application-controller
-      shell: oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n acm-hub
+      shell: oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n acm-hubx
 
 # Apply gitops-applicationset
     - name: Apply gitops-applicationset to deploy ACM 
