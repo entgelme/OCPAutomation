@@ -68,6 +68,8 @@
         namespace: openshift-gitops 
       register: pod_list1
       until: pod_list1|json_query('resources[*].status.phase')|unique == ["Running"]
+      retries: 60
+      delay: 2
 
     # das isses noch nicht ganz. Wir wollen eigentlich wissen, ob 
     #    a) ein Rudel Pods erzeugt wurde
