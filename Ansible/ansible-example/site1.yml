@@ -102,7 +102,7 @@
 # ?
 
 # Apply gitops-applicationset
-    - name: Create an Operator group for gitops 
+    - name: Apply gitops-applicationset to deploy ACM 
       kubernetes.core.k8s:
         state: present
         src: ./files/gitops-applicationset.yml
