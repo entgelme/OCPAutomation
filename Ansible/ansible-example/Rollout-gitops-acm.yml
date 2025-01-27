@@ -116,5 +116,7 @@
       shell: oc create secret generic localusers --from-file htpasswd=htpasswd -n openshift-config
     - name: Enhance permissions for user workshop-admin 
       shell: oc adm policy add-cluster-role-to-user cluster-admin workshop-admin
-    - name: patch oauth
-      shell: oc get -o yaml oauth cluster > oauth.yaml
+    - name: prepare oauth patch 
+      shell: oc get -o yaml oauth cluster > oauth.yaml && oc patch -f oauth.yaml  --patch-file=./files/oauth-patch.yml --type merge --dry-run='client' -o yaml 
+    - name: replace oauth 
+      shell: oc replace -f oauth-patched.yaml
