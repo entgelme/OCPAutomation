@@ -116,10 +116,10 @@
       shell: oc create secret generic localusers --from-file htpasswd=htpasswd -n openshift-config || echo "Secret 'localusers' exists - leaving it unchanged"
       ignore_errors: True
     - name: prepare oauth patch 
-      shell: oc get -o yaml oauth cluster > oauth.yaml && oc patch -f oauth.yaml  --patch-file=./files/oauth-patch.yml --type merge --dry-run='client' -o yaml > oauth-patched.yaml
+      shell: oc get -o yaml oauth cluster > oauth.yml && oc patch -f oauth.yml  --patch-file=./files/oauth-patch.yml --type merge --dry-run='client' -o yaml > oauth-patched.yaml
     - name: replace oauth 
       shell: oc replace -f oauth-patched.yaml
     - name: Set cluster-admin role for user workshop-admin 
       shell: oc adm policy add-cluster-role-to-user cluster-admin workshop-admin
     - name: Enhance permissions for user workshop-admin
-      shell: oc patch clusterrolebinding.rbac open-cluster-management:subscription-admin -p '{"subjects": [{"apiGroup":"rbac.authorization.k8s.io", "kind":"User", "name":"workshop-admin"}]}'
+      shell: oc patch clusterrolebinding.rbac open-cluster-management:subscription-admin --patch-file=./files/clusterrolebinding-patch.yml --type merge
