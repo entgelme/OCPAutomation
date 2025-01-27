@@ -18,18 +18,10 @@
   tasks:
     - name: Greetings
       debug:
-        msg: "Ich sag mal {{ test }}"
-        msg: "Das ocpw lautet {{ ocpw }}"
+        msg: "Installation LocalStorage und ODF"
 
-    - name: test shell command
-      shell: echo "This command runs on "$(hostname)
- 
-    - name: Get environment variable from the shell
-      ansible.builtin.debug:
-        msg: "'{{ lookup('ansible.builtin.env', 'HOME') }}' is the HOME environment variable."
-
-    - name: Login to Hub cluster
-      shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
+#    - name: Login to Hub cluster
+#      shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
 
     - name: Log in (obtain access token)
       redhat.openshift.openshift_auth:
@@ -39,6 +31,7 @@
         validate_certs: false
       register: openshift_auth_results
 
+#   Install LocalStorage
     - name: Create a k8s namespace
       k8s:
         state: present
