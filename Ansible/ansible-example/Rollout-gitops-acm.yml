@@ -113,11 +113,11 @@
     - name: Create htpasswd file
       shell: htpasswd -c -B -b htpasswd workshop-admin redhat 
     - name: Create secret with htpasswd content
-      shell: oc create secret generic localusers --from-file htpasswd=htpasswd -n openshift-config
+      shell: oc create secret generic localusers --from-file htpasswd=htpasswd -n openshift-config || echo "Secret 'localusers' exists - leaving it unchanged"
       ignore_errors: True
     - name: Enhance permissions for user workshop-admin 
       shell: oc adm policy add-cluster-role-to-user cluster-admin workshop-admin
     - name: prepare oauth patch 
-      shell: oc get -o yaml oauth cluster > oauth.yaml && oc patch -f oauth.yaml  --patch-file=./files/oauth-patch.yml --type merge --dry-run='client' -o yaml 
+      shell: oc get -o yaml oauth cluster > oauth.yaml && oc patch -f oauth.yaml  --patch-file=./files/oauth-patch.yml --type merge --dry-run='client' -o yaml > oauth-patched.yaml
     - name: replace oauth 
       shell: oc replace -f oauth-patched.yaml
