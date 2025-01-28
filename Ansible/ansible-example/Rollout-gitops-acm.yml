@@ -111,7 +111,7 @@
 
 # Setup htpasswd
     - name: Create htpasswd file
-      shell: htpasswd -c -B -b htpasswd workshop-admin redhat 
+      shell: htpasswd -c -B -b htpasswd workshop-admin {{ wapw }} 
     - name: Create secret with htpasswd content
       shell: oc create secret generic localusers --from-file htpasswd=htpasswd -n openshift-config || echo "Secret 'localusers' exists - leaving it unchanged"
       ignore_errors: True
