@@ -12,8 +12,8 @@ read -p "Enter the password for the new Ansible Vault: " password
 export VAULT_PASSWORD=$password
 echo "Debug: setting VAULT_PASSWORD to: "$VAULT_PASSWORD
 
-echo "Please enter the key/value pair for 'vault_ocpw: ...' in the following editor" 
-sleep 3
+echo "Please enter the key/value pair for 'vault_ocpw: ... and vault_wapw: ...' in the following editor" 
+sleep 5
 
 rm group_vars/bastion/vault
 ansible-vault create group_vars/bastion/vault
@@ -26,4 +26,4 @@ ansible-vault create group_vars/bastion/vault
 ansible-galaxy collection install kubernetes.core redhat.openshift community.okd community.general --ignore-certs
 
 echo "Done!" 
-echo -e "Start playbook with:\nVAULT_PASSWORD="$VAULT_PASSWORD" ansible-playbook -v -i inventory/hosts.yml site1.yml " 
+echo -e "Start playbook with:\nVAULT_PASSWORD=abcd ansible-playbook -v -i inventory/hosts.yml --extra-vars '{ clustername: "o1-xxxxxx", ocpw: "kubeadminpassword"}' Rollout-gitops-acm.yml " 

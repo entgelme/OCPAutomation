@@ -1,4 +1,12 @@
-clustername: "o1-842809"
+# clustername default
+clustername: "changeme-by-env"
+
+# OCP kubeadmin pw
 ocpw: "{{ vault_ocpw }}"
+
+# OCP API URL
 ocp_api: "api.{{ clustername }}.cp.fyre.ibm.com"
 ocp_api_url: "https://{{ ocp_api }}:6443"
+
+# workshop-admin pw
+wapw: {{ vault_wapw }}
