@@ -9,4 +9,4 @@ ocp_api: "api.{{ clustername }}.cp.fyre.ibm.com"
 ocp_api_url: "https://{{ ocp_api }}:6443"
 
 # workshop-admin pw
-wapw: {{ vault_wapw }}
+wapw: "{{ vault_wapw }}"
