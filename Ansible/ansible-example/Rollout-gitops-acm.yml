@@ -19,7 +19,6 @@
     - name: Greetings
       debug:
         msg: "Ich sag mal {{ test }}"
-        msg: "Das ocpw lautet {{ ocpw }}"
 
     - name: test shell command
       shell: echo "This command runs on "$(hostname)
@@ -112,6 +111,7 @@
 # Setup htpasswd
     - name: Create htpasswd file
       shell: htpasswd -c -B -b htpasswd workshop-admin {{ wapw }} 
+      no_log: true
     - name: Create secret with htpasswd content
       shell: oc create secret generic localusers --from-file htpasswd=htpasswd -n openshift-config || echo "Secret 'localusers' exists - leaving it unchanged"
       ignore_errors: True
