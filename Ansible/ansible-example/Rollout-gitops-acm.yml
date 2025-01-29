@@ -110,7 +110,7 @@
           metadata:
             labels: 
               openshift.io/cluster-monitoring: "true"
-              
+
 # Extend permissions for service account openshift-gitops-argocd-application-controller
 # oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n <namespace>
     - name: Extend permissions for service account openshift-gitops-argocd-application-controller
@@ -135,6 +135,15 @@
       shell: oc replace -f oauth-patched.yaml
     - name: Set cluster-admin role for user workshop-admin 
       shell: oc adm policy add-cluster-role-to-user cluster-admin workshop-admin
+
+# Wait for ACM setup to complete
+    - name: Wait until clusterrolebinding open-cluster-management:subscription-admin exists
+      kubernetes.core.k8s_info:
+        kind: ClusterRoleBinding
+        name: open-cluster-management:subscription-admin
+      retries: 60
+      delay: 2
+# Assign this clusterrole to the user workshop-admin
     - name: Enhance permissions for user workshop-admin
       shell: oc patch clusterrolebinding.rbac open-cluster-management:subscription-admin --patch-file=./files/clusterrolebinding-patch.yml --type merge
 
