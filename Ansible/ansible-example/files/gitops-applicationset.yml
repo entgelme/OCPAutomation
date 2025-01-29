@@ -28,7 +28,7 @@ spec:
         cluster: acm-hub
         url: https://kubernetes.default.svc
         namespace: openshift-gitops
-        wave: 2
+        wave: 3
   template:
     metadata:
       annotations:
