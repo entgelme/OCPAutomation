@@ -6,7 +6,7 @@ metadata:
   namespace: rhacm-policies
 spec:
   clusterSets:
-  - hubcluster
+  - hub
   predicates:
   - requiredClusterSelector:
       labelSelector:
