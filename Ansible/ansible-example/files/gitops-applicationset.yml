@@ -24,7 +24,7 @@ spec:
         url: https://kubernetes.default.svc
         namespace: openshift-gitops
         wave: 2        
-      - product: acm-ws5-policies/acm-hub-policy-acs
+      - product: acm-ws5-policies/acs-operator
         cluster: acm-hub
         url: https://kubernetes.default.svc
         namespace: openshift-gitops
