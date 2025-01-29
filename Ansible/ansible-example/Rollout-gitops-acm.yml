@@ -139,6 +139,7 @@
 # Wait for ACM setup to complete
     - name: Wait until clusterrolebinding open-cluster-management:subscription-admin exists
       kubernetes.core.k8s_info:
+        apiVersion: rbac.authorization.k8s.io/v1
         kind: ClusterRoleBinding
         name: open-cluster-management:subscription-admin
       retries: 60
@@ -146,17 +147,4 @@
 # Assign this clusterrole to the user workshop-admin
     - name: Enhance permissions for user workshop-admin
       shell: oc patch clusterrolebinding.rbac open-cluster-management:subscription-admin --patch-file=./files/clusterrolebinding-patch.yml --type merge
-
-## Setup gitops binding for ACM 
-# Prepare rhacm-policies namespace
-    - name: Create a k8s namespace'rhacm-policies'
-      k8s:
-        state: present
-        name: rhacm-policies
-        api_version: v1
-        kind: Namespace
-        resource_definition:
-          metadata:
-            labels: 
-              openshift.io/cluster-monitoring: "true"
 
