@@ -9,11 +9,26 @@ spec:
   generators:
   - list:
       elements:
-      - product: acs-operator
+      - product: acm-acs-operator
         cluster: acm-hub
         url: https://kubernetes.default.svc
         namespace: rhacm-policies
         wave: 3
+      - product: acm-compliance-operator
+        cluster: acm-hub
+        url: https://kubernetes.default.svc
+        namespace: rhacm-policies
+        wave: 3
+      - product: acm-local-storage-operator
+        cluster: acm-hub
+        url: https://kubernetes.default.svc
+        namespace: rhacm-policies
+        wave: 3
+      - product: acm-odf-operator
+        cluster: acm-hub
+        url: https://kubernetes.default.svc
+        namespace: rhacm-policies
+        wave: 4
   template:
     metadata:
       annotations:
