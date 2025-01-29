@@ -121,7 +121,7 @@ kind: PlacementBinding
 metadata:
   name: binding-policy-odf-operator
 placementRef:
-  name: test-clusters
+  name: hub-cluster
   kind: Placement
   apiGroup: cluster.open-cluster-management.io 
 subjects:
