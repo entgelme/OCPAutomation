@@ -3,6 +3,7 @@ kind: Namespace
 metadata:
   labels:
     kubernetes.io/metadata.name: rhacm-policies
+    openshift.io/cluster-monitoring: "true"
   name: rhacm-policies
 spec:
   finalizers:
