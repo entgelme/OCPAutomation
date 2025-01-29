@@ -12,11 +12,18 @@ spec:
       - product: acm-operator 
         cluster: acm-hub
         url: https://kubernetes.default.svc
+        namespace: acm-hub
         wave: 0
       - product: acm-multiclusterhub
         cluster: acm-hub
         url: https://kubernetes.default.svc
+        namespace: acm-hub
         wave: 1
+      - product: acm-gitops
+        cluster: acm-hub
+        url: https://kubernetes.default.svc
+        namespace: openshift-gitops
+        wave: 2
   template:
     metadata:
       annotations:
@@ -32,4 +39,4 @@ spec:
         path: Install/{{.product}}/
       destination:
         server: '{{.url}}'
-        namespace: acm-hub
+        namespace: '{{.namespace}}'
