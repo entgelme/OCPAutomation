@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: gitops-policies
+  namespace: openshift-gitops
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - product: acs-operator
+        cluster: acm-hub
+        url: https://kubernetes.default.svc
+        namespace: openshift-gitops
+        wave: 0
+  template:
+    metadata:
+      annotations:
+        argocd.argoproj.io/sync-wave: "{{.wave}}"
+      name: '{{.product}}-policies'
+    spec:
+      syncPolicy:
+        automated: {}
+      project: default
+      source:
+        repoURL: https://github.com/entgelme/OCPAutomation.git
+        targetRevision: HEAD
+        path: acm-ws5-policies/{{.product}}/
+      destination:
+        server: '{{.url}}'
+        namespace: '{{.namespace}}'
