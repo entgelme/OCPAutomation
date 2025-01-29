@@ -139,7 +139,7 @@
 # Wait for ACM setup to complete
     - name: Wait until clusterrolebinding open-cluster-management:subscription-admin exists
       kubernetes.core.k8s_info:
-        apiVersion: rbac.authorization.k8s.io/v1
+        api_version: rbac.authorization.k8s.io/v1
         kind: ClusterRoleBinding
         name: open-cluster-management:subscription-admin
       retries: 60
