@@ -12,8 +12,8 @@ spec:
       - product: acs-operator
         cluster: acm-hub
         url: https://kubernetes.default.svc
-        namespace: openshift-gitops
-        wave: 0
+        namespace: rhacm-policies
+        wave: 3
   template:
     metadata:
       annotations:
