@@ -31,7 +31,7 @@ echo "\$ROX_ENDPOINT: "$ROX_ENDPOINT
 export ROX_API_TOKEN="$(cat $ROXCTL_ACCESS_TOKEN_FILE)"
 
 # Generate cluster_init_bundle (uncomment next line, if cluster_init_bundle has not yet been generated on this hub/central)
-#roxctl -e "$ROX_ENDPOINT" central init-bundles generate cluster_init_bundle  --output-secrets cluster_init_bundle.yaml
+#roxctl -e "$ROX_ENDPOINT" central init-bundles generate cluster_init_bundle  --output-secrets cluster_init_bundle.yaml --insecure-skip-tls-verify=true
 
 # Patch acs-host address (running 'central') to sensor.tls 
 # The secured cluster will read it out (see ACM policy 'policy-advanced-managed-cluster-security')
@@ -43,7 +43,7 @@ yq  '(. | select(.metadata.name == "sensor-tls") | .stringData.acs-host) = "'$RO
 CURRENT_CONTEXT="$(oc config current-context)"
 
 # first login to secured cluster
-oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=false|grep Logged
+oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=true < "y"|grep Logged
 
 # then apply the cluster_init_bundle_adjusted.yaml there
 echo "Applying cluster_init_bundle_adjusted.yaml on cluster '"$MC_CLUSTERNAME"'" 
