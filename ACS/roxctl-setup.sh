@@ -43,7 +43,7 @@ yq  '(. | select(.metadata.name == "sensor-tls") | .stringData.acs-host) = "'$RO
 CURRENT_CONTEXT="$(oc config current-context)"
 
 # first login to secured cluster
-oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=true < "y"|grep Logged
+echo "y" | oc login --token $MC_APITOKEN --server=$MC_APIURL --insecure-skip-tls-verify=true < "y"|grep Logged
 
 # then apply the cluster_init_bundle_adjusted.yaml there
 echo "Applying cluster_init_bundle_adjusted.yaml on cluster '"$MC_CLUSTERNAME"'" 
