@@ -31,53 +31,8 @@
     #     state: present
     #     src: ./files/worker-udev-configuration.yml
 
-#    - name: Wait some minutes until all workers have been rebooted
-#       kubernetes.core.k8s_info:
-#         api_version: rbac.authorization.k8s.io/v1
-#         kind: Node
-#         metadata.labels.node-role.kubernetes.io/worker: ""
-# status.conditions.type.ready
-# #        name: open-cluster-management:subscription-admin
-#         wait: yes
-#         wait_sleep: 10
-#         wait_timeout: 360
-      # kubernetes.core.k8s_info:
-      #   kind: Node
-      #   name: worker0.{{ clustername }}.cp.fyre.ibm.com
-      #   state: absent
-#        field_selectors:
-#          - status.conditions.type: "Ready"
-#            status.conditions.status: "True"
-   #     wait: yes
-        # wait_condition: 
-        #   status.conditions.type: "Ready"
-        #   status.conditions.status: "False"
-#      register: node_list1
-#      until: pod_list1|json_query('resources[*].status.phase')|unique == ["Running"]
-      # retries: 3
-      # #60
-      # delay: 2
-
-    - name: Wait for worker0 node to be down
-      kubernetes.core.k8s_info:
-        kind: Node
-        name: worker1.{{ clustername }}.cp.fyre.ibm.com
-        wait: yes
-        wait_condition:
-#          reason: KubeletReady
-          type: Ready
-          status: "Unknown"
-        wait_timeout: 5
-        wait_sleep: 2    
-
-    - name: Wait for worker0 node to be up again
-      kubernetes.core.k8s_info:
-        kind: Node
-        name: worker0.{{ clustername }}.cp.fyre.ibm.com
-        wait: yes
-        wait_condition:
-          reason: KubeletReady
-          type: Ready
-          status: "True"
-        wait_timeout: 120
-        wait_sleep: 2    
+    - name: Wait some minutes until worker0 has been rebooted
+      shell: oc wait --for=condition=Ready=Unknown --timeout=5m node worker0.{{clustername}}.cp.fyre.ibm.com && \
+              echo DOWN && \
+              oc wait --for=condition=Ready=true --timeout=5m node worker0.{{clustername}}.cp.fyre.ibm.com && \
+              echo UP
