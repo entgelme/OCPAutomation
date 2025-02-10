@@ -47,6 +47,10 @@
         field_selectors:
           - status.conditions.type: "Ready"
             status.conditions.status: "False"
+        wait: yes
+#        wait_condition: 
+#          status.conditions.type: "Ready"
+#          status.conditions.status: "False"
 #      register: node_list1
 #      until: pod_list1|json_query('resources[*].status.phase')|unique == ["Running"]
       retries: 3
