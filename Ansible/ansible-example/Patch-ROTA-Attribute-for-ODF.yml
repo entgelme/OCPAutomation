@@ -31,7 +31,7 @@
     #     state: present
     #     src: ./files/worker-udev-configuration.yml
 
-    - name: Wait some minutes until all workers have been rebooted
+#    - name: Wait some minutes until all workers have been rebooted
 #       kubernetes.core.k8s_info:
 #         api_version: rbac.authorization.k8s.io/v1
 #         kind: Node
