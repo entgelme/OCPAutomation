@@ -66,6 +66,6 @@
         wait_condition:
           reason: KubeletReady
           type: Ready
-          status: "unknown"
+          status: "Unknown"
         wait_timeout: 10
         wait_sleep: 2    
