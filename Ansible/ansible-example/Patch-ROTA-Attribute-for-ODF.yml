@@ -61,7 +61,7 @@
     - name: Wait for worker0 node to be down
       kubernetes.core.k8s_info:
         kind: Node
-        name: worker0.{{ clustername }}.cp.fyre.ibm.com
+        name: worker1.{{ clustername }}.cp.fyre.ibm.com
         wait: yes
         wait_condition:
 #          reason: KubeletReady
