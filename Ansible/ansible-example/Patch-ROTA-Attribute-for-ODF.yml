@@ -64,7 +64,7 @@
         name: worker0.{{ clustername }}.cp.fyre.ibm.com
         wait: yes
         wait_condition:
-          reason: KubeletReady
+#          reason: KubeletReady
           type: Ready
           status: "Unknown"
         wait_timeout: 120
