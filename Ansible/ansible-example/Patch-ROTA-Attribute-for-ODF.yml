@@ -46,7 +46,7 @@
         name: worker0.{{ clustername }}.cp.fyre.ibm.com
         field_selectors:
           - status.conditions.type: "Ready"
-            status.conditions.status: "False"
+            status.conditions.status: "True"
         wait: yes
 #        wait_condition: 
 #          status.conditions.type: "Ready"
