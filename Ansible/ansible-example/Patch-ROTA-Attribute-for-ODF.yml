@@ -65,7 +65,8 @@
         wait: yes
         wait_condition:
           reason: KubeletReady
-          type: Absent
-          status: True
+          type: Ready
+          status: "False"
         wait_timeout: 10
-        wait_sleep: 2      
+        wait_sleep: 2    
+        retries: 3  
