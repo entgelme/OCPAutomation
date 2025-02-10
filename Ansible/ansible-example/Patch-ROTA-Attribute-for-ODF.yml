@@ -44,7 +44,7 @@
       kubernetes.core.k8s_info:
         kind: Node
         name: worker0.{{ clustername }}.cp.fyre.ibm.com
-        state: notpresent
+        state: absent
 #        field_selectors:
 #          - status.conditions.type: "Ready"
 #            status.conditions.status: "True"
