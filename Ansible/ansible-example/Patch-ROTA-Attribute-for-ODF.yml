@@ -41,19 +41,30 @@
 #         wait: yes
 #         wait_sleep: 10
 #         wait_timeout: 360
-      kubernetes.core.k8s_info:
-        kind: Node
-        name: worker0.{{ clustername }}.cp.fyre.ibm.com
-        state: absent
+      # kubernetes.core.k8s_info:
+      #   kind: Node
+      #   name: worker0.{{ clustername }}.cp.fyre.ibm.com
+      #   state: absent
 #        field_selectors:
 #          - status.conditions.type: "Ready"
 #            status.conditions.status: "True"
-        wait: yes
+   #     wait: yes
         # wait_condition: 
         #   status.conditions.type: "Ready"
         #   status.conditions.status: "False"
 #      register: node_list1
 #      until: pod_list1|json_query('resources[*].status.phase')|unique == ["Running"]
-      retries: 3
-      #60
-      delay: 2
+      # retries: 3
+      # #60
+      # delay: 2
+
+    - name: Wait for each node to be ready
+      kubernetes.core.k8s_info:
+        kind: Node
+        wait: yes
+        wait_condition:
+          reason: KubeletReady
+          type: Ready
+          status: True
+        wait_timeout: 30
+        wait_sleep: 2      
