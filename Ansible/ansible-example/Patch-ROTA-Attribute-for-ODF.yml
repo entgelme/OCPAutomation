@@ -44,13 +44,14 @@
       kubernetes.core.k8s_info:
         kind: Node
         name: worker0.{{ clustername }}.cp.fyre.ibm.com
-        field_selectors:
-          - status.conditions.type: "Ready"
-            status.conditions.status: "True"
+        state: notpresent
+#        field_selectors:
+#          - status.conditions.type: "Ready"
+#            status.conditions.status: "True"
         wait: yes
-        wait_condition: 
-          status.conditions.type: "Ready"
-          status.conditions.status: "False"
+        # wait_condition: 
+        #   status.conditions.type: "Ready"
+        #   status.conditions.status: "False"
 #      register: node_list1
 #      until: pod_list1|json_query('resources[*].status.phase')|unique == ["Running"]
       retries: 3
