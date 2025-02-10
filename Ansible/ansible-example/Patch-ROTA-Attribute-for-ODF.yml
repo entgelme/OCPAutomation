@@ -64,8 +64,8 @@
         name: worker0.{{ clustername }}.cp.fyre.ibm.com
         wait: yes
         wait_condition:
-          reason: KubeletReady
-          type: Ready
-          status: "False"
+#          reason: KubeletReady
+#          type: Ready
+          Ready: "True"
         wait_timeout: 10
         wait_sleep: 2    
