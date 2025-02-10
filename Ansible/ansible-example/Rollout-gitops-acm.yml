@@ -1,5 +1,5 @@
 ---
-- name: Configure OCP
+- name: Configure OCP for ACM w/ gitops
   hosts: bastion
   connection: local
   gather_facts: false
@@ -13,12 +13,12 @@
     - group_vars/web.yml
 
   vars:
-    test: "Hallo"
+    test: "ACM w/ gitops"
 
   tasks:
     - name: Greetings
       debug:
-        msg: "Ich sag mal {{ test }}"
+        msg: "Tasks to configure OCP for: {{ test }}"
 
     - name: test shell command
       shell: echo "This command runs on "$(hostname)
