@@ -58,7 +58,7 @@
       # #60
       # delay: 2
 
-    - name: Wait for worker0 node to be ready
+    - name: Wait for worker0 node to be down
       kubernetes.core.k8s_info:
         kind: Node
         name: worker0.{{ clustername }}.cp.fyre.ibm.com
@@ -67,5 +67,17 @@
           reason: KubeletReady
           type: Ready
           status: "Unknown"
-        wait_timeout: 10
+        wait_timeout: 120
+        wait_sleep: 2    
+
+    - name: Wait for worker0 node to be up again
+      kubernetes.core.k8s_info:
+        kind: Node
+        name: worker0.{{ clustername }}.cp.fyre.ibm.com
+        wait: yes
+        wait_condition:
+          reason: KubeletReady
+          type: Ready
+          status: "True"
+        wait_timeout: 120
         wait_sleep: 2    
