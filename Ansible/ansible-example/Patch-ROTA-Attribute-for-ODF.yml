@@ -26,10 +26,10 @@
       register: openshift_auth_results
 
 # Apply MachineConfig 'worker-udev-configuration'
-    - name: Apply worker-udev-configuration to change the ROTA attribute of node's extra disks (vdb, vdc) 
-      kubernetes.core.k8s:
-        state: present
-        src: ./files/worker-udev-configuration.yml
+    # - name: Apply worker-udev-configuration to change the ROTA attribute of node's extra disks (vdb, vdc) 
+    #   kubernetes.core.k8s:
+    #     state: present
+    #     src: ./files/worker-udev-configuration.yml
 
     - name: Wait some minutes until all workers have been rebooted
 #       kubernetes.core.k8s_info:
