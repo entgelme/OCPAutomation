@@ -67,7 +67,7 @@
 #          reason: KubeletReady
           type: Ready
           status: "Unknown"
-        wait_timeout: 120
+        wait_timeout: 5
         wait_sleep: 2    
 
     - name: Wait for worker0 node to be up again
