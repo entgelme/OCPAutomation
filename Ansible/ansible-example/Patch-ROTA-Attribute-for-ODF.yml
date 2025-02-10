@@ -32,7 +32,7 @@
     #     src: ./files/worker-udev-configuration.yml
 
     - name: Wait some minutes until worker0 has been rebooted
-      shell: oc wait --for=condition=Ready=Unknown --timeout=5m node worker0.{{clustername}}.cp.fyre.ibm.com && \
+      shell: "oc wait --for=condition=Ready=Unknown --timeout=5m node worker0.{{ clustername }}.cp.fyre.ibm.com && \
               echo DOWN && \
-              oc wait --for=condition=Ready=true --timeout=5m node worker0.{{clustername}}.cp.fyre.ibm.com && \
-              echo UP
+              oc wait --for=condition=Ready=true --timeout=5m node worker0.{{ clustername }}.cp.fyre.ibm.com && \
+              echo UP"
