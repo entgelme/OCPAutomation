@@ -49,5 +49,6 @@
             status.conditions.status: "False"
 #      register: node_list1
 #      until: pod_list1|json_query('resources[*].status.phase')|unique == ["Running"]
-      retries: 60
+      retries: 3
+      #60
       delay: 2
