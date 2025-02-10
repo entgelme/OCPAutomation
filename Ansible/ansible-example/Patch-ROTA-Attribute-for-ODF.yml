@@ -31,6 +31,10 @@
     #     state: present
     #     src: ./files/worker-udev-configuration.yml
 
+    - name: Login to Hub cluster
+      shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
+      no_log: true
+      
     - name: Wait some minutes until worker0 has been rebooted
       shell: "oc wait --for=condition=Ready=Unknown --timeout=5m node worker0.{{ clustername }}.cp.fyre.ibm.com && \
               echo DOWN && \
