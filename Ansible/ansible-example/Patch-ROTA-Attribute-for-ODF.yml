@@ -29,7 +29,7 @@
     - name: Apply worker-udev-configuration to change the ROTA attribute of node's extra disks (vdb, vdc) 
       kubernetes.core.k8s:
         state: present
-        src: ./files/worker-udev-configuration.yml
+        src: ./files/MachineConfig-worker-udev-configuration.yml
 
     - name: Login to Hub cluster
       shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
