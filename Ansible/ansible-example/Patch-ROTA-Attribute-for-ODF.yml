@@ -67,5 +67,5 @@
           reason: KubeletReady
           type: Ready
           status: True
-        wait_timeout: 30
+        wait_timeout: 10
         wait_sleep: 2      
