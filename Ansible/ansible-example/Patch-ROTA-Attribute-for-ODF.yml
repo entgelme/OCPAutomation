@@ -69,4 +69,3 @@
           status: "False"
         wait_timeout: 10
         wait_sleep: 2    
-        retries: 3  
