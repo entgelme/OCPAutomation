@@ -66,8 +66,8 @@
       shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
       no_log: true
 
-    - name: Wait until worker0 is set unscheduable (this may take some minutes)
+    - name: Wait until worker0 is set unschedulable (this may take some minutes)
       shell: oc wait --for=jsonpath='{.spec.unschedulable}' --timeout=5m node worker0.{{ clustername }}.cp.fyre.ibm.com && echo "worker0 DOWN" 
 
     - name: Wait until worker0 is up again after reboot (this may take some minutes)
-      shell: until oc get node |grep SchedulingDisabled; do echo .; done &&  echo "worker0 UP"              
+      shell: until oc get node worker0.{{ clustername }}.cp.fyre.ibm.com --no-headers=true | grep -v SchedulingDisabled; do echo .; done &&  echo "worker0 UP"              
