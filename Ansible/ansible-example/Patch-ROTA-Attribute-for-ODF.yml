@@ -31,37 +31,6 @@
         state: present
         src: ./files/MachineConfig-worker-udev-configuration.yml
 
-
-
-# # Wait until worker0 is set unscheduable (this may take some minutes)
-#     - name: Wait until worker0 is set unscheduable (this may take some minutes)
-#       kubernetes.core.k8s_info:
-#         kind: Node
-# #        name: worker0.{{clustername}}.cp.fyre.ibm.com
-#         label_selectors:
-#           - node-role.kubernetes.io/worker
-#       register: node_list1
-#       until: node_list1|json_query('resources[*].spec.unschedulable')  == ["true"]
-#       retries: 60
-#       delay: 2
-#     - debug:
-#         var: node_list1
-
-#     - name: Count items in a list
-#       debug:
-#         msg: "{{ node_list1 | json_query('resources[*].spec.unschedulable')  | length}}"
-
-# # Wait until worker0 is schedulable again (this may take some minutes)
-#     - name: Wait until worker0 is set unscheduable (this may take some minutes)
-#       kubernetes.core.k8s_info:
-#         kind: Node
-#         name: worker0.{{clustername}}.cp.fyre.ibm.com
-#       register: node_list2
-#       until: node_list2|json_query('resources[*].spec')|unique == [{}]
-#       retries: 60
-#       delay: 2
-
-
     - name: Login to Hub cluster
       shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
       no_log: true
