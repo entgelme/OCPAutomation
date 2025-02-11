@@ -48,7 +48,7 @@
       # delay: 2
     - name: Count items in a list
       debug:
-        msg: "{{ node_list1 | json_query('resources[*].spec.unschedulable') }}"
+        msg: "{{ node_list1 | json_query('resources[*].spec.unschedulable')  | first | length}}"
 
 # # Wait until worker0 is schedulable again (this may take some minutes)
 #     - name: Wait until worker0 is set unscheduable (this may take some minutes)
