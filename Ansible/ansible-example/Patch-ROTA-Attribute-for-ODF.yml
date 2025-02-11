@@ -37,8 +37,9 @@
     - name: Wait until worker0 is set unscheduable (this may take some minutes)
       kubernetes.core.k8s_info:
         kind: Node
-        name: worker0.{{clustername}}.cp.fyre.ibm.com
-        labels:
+#        name: worker0.{{clustername}}.cp.fyre.ibm.com
+        label_selectors:
+          - node-role.kubernetes.io/worker
       register: node_list1
     - debug:
         var: node_list1
