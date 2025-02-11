@@ -46,8 +46,8 @@
       kubernetes.core.k8s_info:
         kind: Node
         name: worker0.{{clustername}}.cp.fyre.ibm.com
-      register: node_list1
-      until: node_list1|json_query('resources[*].spec')|unique == [{}]
+      register: node_list2
+      until: node_list2|json_query('resources[*].spec')|unique == [{}]
       retries: 60
       delay: 2
 
