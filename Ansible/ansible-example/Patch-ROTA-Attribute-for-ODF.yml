@@ -37,7 +37,7 @@
         kind: Node
         name: worker0.{{clustername}}.cp.fyre.ibm.com
       register: node_list1
-      until: node_list1|json_query('.spec.unschedulable')|unique == ["true"]
+      until: node_list1|json_query('spec.unschedulable')|unique == ["true"]
       retries: 60
       delay: 2
 
