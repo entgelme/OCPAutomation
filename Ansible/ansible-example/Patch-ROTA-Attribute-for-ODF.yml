@@ -41,11 +41,13 @@
         label_selectors:
           - node-role.kubernetes.io/worker
       register: node_list1
+
+      until: node_list1|json_query('resources[*].spec.unschedulable') | length == ["1"]
+      retries: 60
+      delay: 2
     - debug:
         var: node_list1
-      # until: node_list1|json_query('resources[*].spec.unschedulable') == ["true"]
-      # retries: 60
-      # delay: 2
+
     - name: Count items in a list
       debug:
         msg: "{{ node_list1 | json_query('resources[*].spec.unschedulable')  | length}}"
