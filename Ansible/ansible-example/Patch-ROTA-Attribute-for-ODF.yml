@@ -41,7 +41,7 @@
         label_selectors:
           - node-role.kubernetes.io/worker
       register: node_list1
-      until: node_list1|json_query('resources[*].spec.unschedulable')  == "true"
+      until: node_list1|json_query('resources[*].spec.unschedulable')  == ["true"]
       retries: 60
       delay: 2
     - debug:
