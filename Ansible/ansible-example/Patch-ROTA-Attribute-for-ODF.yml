@@ -42,7 +42,7 @@
           - node-role.kubernetes.io/worker
       register: node_list1
 
-      until: node_list1|json_query('resources[*].spec.unschedulable') | length == ["1"]
+      until: node_list1|json_query('resources[*].spec.unschedulable') | length == "1"
       retries: 60
       delay: 2
     - debug:
