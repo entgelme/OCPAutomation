@@ -41,4 +41,4 @@
       shell: oc wait --for=jsonpath='{.spec.unschedulable}' --timeout=5m node worker0.{{ clustername }}.cp.fyre.ibm.com && echo "worker0 DOWN" 
 
     - name: Wait until worker0 is up again after reboot (this may take some minutes)
-      shell: until oc get node worker0.{{ clustername }}.cp.fyre.ibm.com --no-headers=true | grep -v SchedulingDisabled; do echo -n .; done &&  echo -e "\nworker0 UP"              
+      shell: while oc get node --no-headers=true | grep SchedulingDisabled |grep worker > /dev/null; do echo -n . && sleep 3; done &&  echo -e "\nworker0 UP" 
