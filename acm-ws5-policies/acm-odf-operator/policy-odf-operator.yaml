@@ -52,72 +52,72 @@ spec:
 #            installPlanApproval: Automatic
             source: redhat-operators
             sourceNamespace: openshift-marketplace     
-    - objectDefinition:
-        apiVersion: policy.open-cluster-management.io/v1
-        kind: ConfigurationPolicy
-        metadata:
-          name: odf-storagecluster
-        spec:
-          object-templates:
-            - complianceType: musthave
-              objectDefinition:
-                apiVersion: odf.openshift.io/v1alpha1
-                kind: StorageSystem
-                metadata:
-                  name: ocs-storagecluster-storagesystem
-                  namespace: openshift-storage
-                spec:
-                  kind: storagecluster.ocs.openshift.io/v1
-                  name: ocs-storagecluster
-                  namespace: openshift-storage
-            - complianceType: musthave
-              objectDefinition:
-                apiVersion: ocs.openshift.io/v1
-                kind: StorageCluster
-                metadata:
-                  annotations:
-                    uninstall.ocs.openshift.io/cleanup-policy: delete
-                    uninstall.ocs.openshift.io/mode: graceful
-                  name: ocs-storagecluster
-                  namespace: openshift-storage
-                spec:
-                  arbiter: {}
-                  encryption:
-                    kms: {}
-                  externalStorage: {}
-                  managedResources:
-                    cephBlockPools: {}
-                    cephCluster: {}
-                    cephConfig: {}
-                    cephDashboard: {}
-                    cephFilesystems: {}
-                    cephObjectStoreUsers: {}
-                    cephObjectStores: {}
-                    cephToolbox: {}
-                  mirroring: {}
-                  nodeTopologies: {}
-                  storageDeviceSets:
-                  - config: {}
-                    count: 1
-                    dataPVCTemplate:
-                      metadata: {}
-                      spec:
-                        accessModes:
-                        - ReadWriteOnce
-                        resources:
-                          requests:
-                            storage: 100Gi
-                        storageClassName: local-block
-                        volumeMode: Block
-                      status: {}
-                    name: ocs-deviceset-gp3-csi
-                    placement: {}
-                    portable: true
-                    preparePlacement: {}
-                    replica: 3
-                    resources: {}
-          remediationAction: inform
-          severity: low
+    # - objectDefinition:
+    #     apiVersion: policy.open-cluster-management.io/v1
+    #     kind: ConfigurationPolicy
+    #     metadata:
+    #       name: odf-storagecluster
+    #     spec:
+    #       object-templates:
+    #         - complianceType: musthave
+    #           objectDefinition:
+    #             apiVersion: odf.openshift.io/v1alpha1
+    #             kind: StorageSystem
+    #             metadata:
+    #               name: ocs-storagecluster-storagesystem
+    #               namespace: openshift-storage
+    #             spec:
+    #               kind: storagecluster.ocs.openshift.io/v1
+    #               name: ocs-storagecluster
+    #               namespace: openshift-storage
+    #         - complianceType: musthave
+    #           objectDefinition:
+    #             apiVersion: ocs.openshift.io/v1
+    #             kind: StorageCluster
+    #             metadata:
+    #               annotations:
+    #                 uninstall.ocs.openshift.io/cleanup-policy: delete
+    #                 uninstall.ocs.openshift.io/mode: graceful
+    #               name: ocs-storagecluster
+    #               namespace: openshift-storage
+    #             spec:
+    #               arbiter: {}
+    #               encryption:
+    #                 kms: {}
+    #               externalStorage: {}
+    #               managedResources:
+    #                 cephBlockPools: {}
+    #                 cephCluster: {}
+    #                 cephConfig: {}
+    #                 cephDashboard: {}
+    #                 cephFilesystems: {}
+    #                 cephObjectStoreUsers: {}
+    #                 cephObjectStores: {}
+    #                 cephToolbox: {}
+    #               mirroring: {}
+    #               nodeTopologies: {}
+    #               storageDeviceSets:
+    #               - config: {}
+    #                 count: 1
+    #                 dataPVCTemplate:
+    #                   metadata: {}
+    #                   spec:
+    #                     accessModes:
+    #                     - ReadWriteOnce
+    #                     resources:
+    #                       requests:
+    #                         storage: 100Gi
+    #                     storageClassName: local-block
+    #                     volumeMode: Block
+    #                   status: {}
+    #                 name: ocs-deviceset-gp3-csi
+    #                 placement: {}
+    #                 portable: true
+    #                 preparePlacement: {}
+    #                 replica: 3
+    #                 resources: {}
+    #       remediationAction: inform
+    #       severity: low
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
