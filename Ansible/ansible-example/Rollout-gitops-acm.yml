@@ -28,7 +28,7 @@
         msg: "'{{ lookup('ansible.builtin.env', 'HOME') }}' is the HOME environment variable."
 
     - name: Login to Hub cluster
-      shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
+      shell: echo "y" | oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
       no_log: true
 
     - name: Log in (obtain access token)

@@ -33,7 +33,7 @@
 
 # Login to cluster in shell 
     - name: Login to Hub cluster
-      shell: oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
+      shell: echo "y" | oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
       no_log: true
 
 # Wait in shell for all workers become available again 
