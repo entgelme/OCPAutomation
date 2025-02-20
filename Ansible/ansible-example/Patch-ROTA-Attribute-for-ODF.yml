@@ -16,6 +16,11 @@
       debug:
         msg: "Tasks to configure OCP for: {{ test }}"
 
+# Login to cluster in shell 
+    - name: Login to Hub cluster
+      shell: echo "y" | oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
+      no_log: true
+
 # Log in (obtain access token for following kubernetes.core.k8s tasks)
     - name: Log in (obtain access token)
       redhat.openshift.openshift_auth:
@@ -30,11 +35,6 @@
       kubernetes.core.k8s:
         state: present
         src: ./files/MachineConfig-worker-udev-configuration.yml
-
-# Login to cluster in shell 
-    - name: Login to Hub cluster
-      shell: echo "y" | oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
-      no_log: true
 
 # Wait in shell for all workers become available again 
     - name: Wait until worker0 is set unschedulable (this may take some minutes)
