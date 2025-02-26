@@ -72,35 +72,35 @@ spec:
                             operator: Exists
           remediationAction: enforce
           severity: low
-    # - objectDefinition:
-    #     apiVersion: policy.open-cluster-management.io/v1
-    #     kind: ConfigurationPolicy
-    #     metadata:
-    #       name: policy-localvolumeset
-    #     spec:
-    #       object-templates:
-    #         - complianceType: musthave
-    #           objectDefinition:
-    #             apiVersion: local.storage.openshift.io/v1alpha1
-    #             kind: LocalVolumeSet
-    #             metadata:
-    #               name: local-block
-    #               namespace: openshift-local-storage
-    #             spec:
-    #               deviceInclusionSpec:
-    #                 deviceTypes:
-    #                 - disk
-    #                 minSize: 10G
-    #               maxDeviceCount: 1
-    #               nodeSelector:
-    #                 nodeSelectorTerms:
-    #                 - matchExpressions:
-    #                   - key: node-role.kubernetes.io/worker
-    #                     operator: Exists
-    #               storageClassName: local-block
-    #               volumeMode: Block
-    #       remediationAction: inform   # volumeset temporarily disabled, until auto-install of ODF is working properly
-    #       severity: low
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-localvolumeset
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: local.storage.openshift.io/v1alpha1
+                kind: LocalVolumeSet
+                metadata:
+                  name: local-block
+                  namespace: openshift-local-storage
+                spec:
+                  deviceInclusionSpec:
+                    deviceTypes:
+                    - disk
+                    minSize: 10G
+                  maxDeviceCount: 1
+                  nodeSelector:
+                    nodeSelectorTerms:
+                    - matchExpressions:
+                      - key: node-role.kubernetes.io/worker
+                        operator: Exists
+                  storageClassName: local-block
+                  volumeMode: Block
+          remediationAction: inform   # volumeset temporarily disabled, until auto-install of ODF is working properly
+          severity: low
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
