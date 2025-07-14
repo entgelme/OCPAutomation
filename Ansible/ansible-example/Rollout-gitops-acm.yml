@@ -99,18 +99,6 @@
               openshift.io/cluster-monitoring: "true"
 
 ## Setup gitops binding for ACM 
-# Prepare rhacm-policies namespace
-    # - name: Create a k8s namespace'rhacm-policies'
-    #   k8s:
-    #     state: present
-    #     name: rhacm-policies
-    #     api_version: v1
-    #     kind: Namespace
-    #     resource_definition:
-    #       metadata:
-    #         labels: 
-    #           openshift.io/cluster-monitoring: "true"
-
 # Extend permissions for service account openshift-gitops-argocd-application-controller
 # oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n <namespace>
     - name: Extend permissions for service account openshift-gitops-argocd-application-controller
@@ -137,6 +125,9 @@
       shell: oc adm policy add-cluster-role-to-user cluster-admin workshop-admin
 
 # Wait for ACM setup to complete
+# Something like this could also be used as a first step preceeding the wait for the clusterrolebinding:
+# oc wait --for=jsonpath='{.status.phase}'='Succeeded' csv -n open-cluster-management -l operators.coreos.com/advanced-cluster-management.open-cluster-management=''
+
     - name: Wait until clusterrolebinding open-cluster-management:subscription-admin exists
       kubernetes.core.k8s_info:
         api_version: rbac.authorization.k8s.io/v1

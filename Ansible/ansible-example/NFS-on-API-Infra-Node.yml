@@ -1,0 +1,41 @@
+---
+- name: Install and expose NFS server on the Fyre cluster's "API" infrastructure node
+  hosts: bastion 
+  connection: local
+  gather_facts: false
+  module_defaults:
+#  redhat.openshift.openshift:
+#    host: https://{{ ocp_api }}:6443
+#    ca_cert: ca.pem       
+#  become: true
+
+  vars:
+    test: "Install and expose NFS server on the Fyre cluster's "API" infrastructure node"
+
+  tasks:
+    - name: Greetings
+      debug:
+        msg: "Tasks to configure OCP cluster for: {{ test }}"
+
+# copy /home/ocuser/nfs/setup-local-nfs.sh to "API" node /root 
+    - name: Transfer and execute /home/ocuser/nfs/setup-local-nfs.sh at the "API" node
+      hosts: {{ ocp_api }} 
+      tasks:
+
+        - name: Copy and Execute the script 
+          script: /home/ocuser/nfs/setup-local-nfs.sh
+          
+# Login to cluster in shell 
+    - name: Login to Hub cluster
+      shell: echo "y" | oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
+      no_log: true
+
+# Log in (obtain access token for following kubernetes.core.k8s tasks)
+    - name: Log in (obtain access token)
+      redhat.openshift.openshift_auth:
+        host: "{{ ocp_api_url }}"
+        username: "kubeadmin"
+        password: "{{ ocpw }}"
+        validate_certs: false
+      register: openshift_auth_results
+
