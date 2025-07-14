@@ -1,7 +1,8 @@
 ---
 - name: Install and expose NFS server on the Fyre cluster's "API" infrastructure node
-  hosts: bastion 
-  connection: local
+#  hosts: bastion 
+#  connection: local
+  hosts: "{{ ocp_api }}" 
   gather_facts: false
   module_defaults:
 #  redhat.openshift.openshift:
@@ -19,11 +20,7 @@
 
 # copy /home/ocuser/nfs/setup-local-nfs.sh to "API" node /root 
     - name: "Transfer and execute /home/ocuser/nfs/setup-local-nfs.sh at the 'API' node"
-      hosts: {{ ocp_api }} 
-      tasks:
-
-        - name: Copy and Execute the script 
-          script: /home/ocuser/nfs/setup-local-nfs.sh
+      script: /home/ocuser/nfs/setup-local-nfs.sh
           
 # Login to cluster in shell 
     - name: Login to Hub cluster
