@@ -10,7 +10,7 @@
 #  become: true
 
   vars:
-    test: "Install and expose NFS server on the Fyre cluster's "API" infrastructure node"
+    test: "Install and expose NFS server on the Fyre cluster's 'API' infrastructure node"
 
   tasks:
     - name: Greetings
