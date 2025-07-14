@@ -17,7 +17,7 @@
   tasks:
     - name: Greetings
       debug:
-        msg: "Tasks to configure OCP cluster for: {{ test }}"
+        msg: "Tasks to configure OCP cluster {{ ocp_api }} for: {{ test }}"
 
 # copy /home/ocuser/nfs/setup-local-nfs.sh to "API" node /root 
     - name: "Transfer and execute /home/ocuser/nfs/setup-local-nfs.sh at the 'API' node"
