@@ -12,6 +12,7 @@
 
   vars:
     test: "Install and expose NFS server on the Fyre cluster's 'API' infrastructure node"
+    ocp_api: "api.{{ clustername }}.cp.fyre.ibm.com"
 
   tasks:
     - name: Greetings
@@ -22,17 +23,4 @@
     - name: "Transfer and execute /home/ocuser/nfs/setup-local-nfs.sh at the 'API' node"
       script: /home/ocuser/nfs/setup-local-nfs.sh
           
-# Login to cluster in shell 
-    - name: Login to Hub cluster
-      shell: echo "y" | oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
-      no_log: true
-
-# Log in (obtain access token for following kubernetes.core.k8s tasks)
-    - name: Log in (obtain access token)
-      redhat.openshift.openshift_auth:
-        host: "{{ ocp_api_url }}"
-        username: "kubeadmin"
-        password: "{{ ocpw }}"
-        validate_certs: false
-      register: openshift_auth_results
 
