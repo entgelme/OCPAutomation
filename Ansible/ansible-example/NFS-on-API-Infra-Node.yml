@@ -1,5 +1,5 @@
 ---
-- name: Install and expose NFS server on the Fyre cluster's "API" infrastructure node
+- name: "Install and expose NFS server on the Fyre cluster's 'API' infrastructure node"
 #  hosts: bastion 
 #  connection: local
   hosts: "{{ ocp_api }}" 
