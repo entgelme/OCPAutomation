@@ -2,7 +2,7 @@
 - name: "Install and expose NFS server on the Fyre cluster´s 'API' infrastructure node"
 #  hosts: bastion 
 #  connection: local
-  hosts: "{{ ocp_api }}" 
+  hosts: apiserver
   gather_facts: false
   module_defaults:
 #  redhat.openshift.openshift:
