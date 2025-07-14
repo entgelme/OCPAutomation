@@ -1,0 +1,8 @@
+# clustername default
+clustername: "changeme-by-env"
+
+# OCP API server
+ocp_api: "api.{{ clustername }}.cp.fyre.ibm.com"
+
+# api server root pw
+api_root_pw: "{{ vault_api_root_pw }}"

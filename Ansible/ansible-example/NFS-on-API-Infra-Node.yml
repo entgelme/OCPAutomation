@@ -12,7 +12,7 @@
 
   vars:
     test: "Install and expose NFS server on the Fyre cluster's 'API' infrastructure node"
-    ocp_api: "api.{{ clustername }}.cp.fyre.ibm.com"
+    # ocp_api: "api.{{ clustername }}.cp.fyre.ibm.com"
 
   tasks:
     - name: Greetings
