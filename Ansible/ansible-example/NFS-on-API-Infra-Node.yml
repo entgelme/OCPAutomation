@@ -21,6 +21,6 @@
 
 # copy /home/ocuser/nfs/setup-local-nfs.sh to "API" node /root 
     - name: "Transfer and execute /home/ocuser/nfs/setup-local-nfs.sh at the 'API' node"
-      script: /home/ocuser/nfs/setup-local-nfs.sh
+      script: ./files/setup-local-nfs.sh
           
 
