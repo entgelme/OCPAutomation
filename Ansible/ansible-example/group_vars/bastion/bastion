@@ -10,3 +10,6 @@ ocp_api_url: "https://{{ ocp_api }}:6443"
 
 # workshop-admin pw
 wapw: "{{ vault_wapw }}"
+
+# api server root pw
+api_root_pw: "{{ vault_api_root_pw }}"
