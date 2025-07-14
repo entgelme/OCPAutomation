@@ -12,7 +12,7 @@ read -p "Enter the password for the new Ansible Vault: " password
 export VAULT_PASSWORD=$password
 echo "Debug: setting VAULT_PASSWORD to: "$VAULT_PASSWORD
 
-echo "Please enter the key/value pair for 'vault_ocpw: ... and vault_wapw: ...' in the following editor" 
+echo "Please enter the key/value pair for 'vault_ocpw, vault_wapw and vault_api_root_pw ...' in the following editor" 
 sleep 5
 
 rm group_vars/bastion/vault
