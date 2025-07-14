@@ -1,26 +1,18 @@
 ---
 - name: "Install and expose NFS server on the Fyre cluster´s 'API' infrastructure node"
-#  hosts: bastion 
-#  connection: local
   hosts: apiserver
   gather_facts: false
-  module_defaults:
-#  redhat.openshift.openshift:
-#    host: https://{{ ocp_api }}:6443
-#    ca_cert: ca.pem       
-#  become: true
 
   vars:
     test: "Install and expose NFS server on the Fyre cluster's 'API' infrastructure node"
-    # ocp_api: "api.{{ clustername }}.cp.fyre.ibm.com"
 
   tasks:
     - name: Greetings
       debug:
         msg: "Tasks to configure OCP cluster {{ ocp_api }} for: {{ test }}"
 
-# copy /home/ocuser/nfs/setup-local-nfs.sh to "API" node /root 
-    - name: "Transfer and execute /home/ocuser/nfs/setup-local-nfs.sh at the 'API' node"
+# copy and execute setup-local-nfs.sh toat  "API" node /root 
+    - name: "Transfer and execute setup-local-nfs.sh at the 'API' node"
       script: ./files/setup-local-nfs.sh
           
 
