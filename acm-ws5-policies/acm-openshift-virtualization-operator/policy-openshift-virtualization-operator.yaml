@@ -47,6 +47,7 @@ spec:
           remediationAction: enforce
           severity: critical
           complianceType: musthave
+          upgradeApproval: Automatic
           subscription:
             channel: stable
             installPlanApproval: Automatic
