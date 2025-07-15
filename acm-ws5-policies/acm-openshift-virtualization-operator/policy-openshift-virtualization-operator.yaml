@@ -50,7 +50,6 @@ spec:
           upgradeApproval: Automatic
           subscription:
             channel: stable
-            installPlanApproval: Automatic
             name: kubevirt-hyperconverged-operator
             namespace: openshift-cnv
             source: redhat-operators
