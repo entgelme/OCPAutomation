@@ -49,8 +49,9 @@ spec:
           complianceType: musthave
           upgradeApproval: Automatic
           subscription:
-            channel: stable
-            name: kubevirt-hyperconverged-operator
+            channel: "stable"
+            name: hco-operatorhub
+            startingCSV: kubevirt-hyperconverged-operator.v4.19.0
             namespace: openshift-cnv
             source: redhat-operators
             sourceNamespace: openshift-marketplace
