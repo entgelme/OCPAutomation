@@ -51,7 +51,8 @@ spec:
           subscription:
             channel: stable
             installPlanApproval: Automatic
-            name: kubevirt-hyperconverged-operator.v4.19.0
+            name: kubevirt-hyperconverged-operator
+            namespace: openshift-cnv
             source: redhat-operators
             sourceNamespace: openshift-marketplace
 ---
