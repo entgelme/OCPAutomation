@@ -10,7 +10,7 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: policy-openshift-virtualization-basic-operator
+          name: policy-openshift-virtualization-operator
         spec:
           object-templates:
             - complianceType: musthave
@@ -31,30 +31,21 @@ spec:
                 spec:
                   targetNamespaces:
                     - openshift-cnv
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: operators.coreos.com/v1alpha1
+                kind: Subscription
+                metadata:
+                  name: hco-operatorhub
+                  namespace: openshift-cnv
+                spec:
+                  source: redhat-operators
+                  sourceNamespace: openshift-marketplace
+                  name: kubevirt-hyperconverged
+                  startingCSV: kubevirt-hyperconverged-operator.v4.19.0
+                  channel: "stable" 
           remediationAction: enforce
           severity: low
-    - objectDefinition:
-        apiVersion: policy.open-cluster-management.io/v1beta1
-        kind: OperatorPolicy
-        metadata:
-          name: install-openshift-virtualization
-        spec:
-          operatorGroup: 
-              name: kubevirt-hyperconverged-group
-              namespace: openshift-cnv
-          versions: 
-            - kubevirt-hyperconverged-operator.v4.19.0
-          remediationAction: enforce
-          severity: critical
-          complianceType: musthave
-          upgradeApproval: Automatic
-          subscription:
-            channel: "stable"
-            name: hco-operatorhub
-            startingCSV: kubevirt-hyperconverged-operator.v4.19.0
-            namespace: openshift-cnv
-            source: redhat-operators
-            sourceNamespace: openshift-marketplace
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
