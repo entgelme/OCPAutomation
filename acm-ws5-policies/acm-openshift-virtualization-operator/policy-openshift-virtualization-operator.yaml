@@ -1,7 +1,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
-  name: policy-gitops-operator
+  name: policy-openshift-virtualization-operator
   namespace: rhacm-policies
 spec:
   disabled: false
@@ -57,13 +57,13 @@ spec:
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
-  name: binding-policy-gitops-operator
+  name: binding-policy-openshift-virtualization-operator
   namespace: rhacm-policies
 placementRef:
-  name: test-clusters
+  name: hub-cluster
   kind: Placement
   apiGroup: cluster.open-cluster-management.io 
 subjects:
-- name: policy-gitops-operator
+- name: policy-openshift-virtualization-operator
   kind: Policy
   apiGroup: policy.open-cluster-management.io
