@@ -46,6 +46,23 @@ spec:
                   channel: "stable" 
           remediationAction: enforce
           severity: low
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: kubevirt-hyperconverged
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: hco.kubevirt.io/v1beta1
+                kind: HyperConverged
+                metadata:
+                  name: kubevirt-hyperconverged
+                  namespace: openshift-cnv
+                spec:
+          remediationAction: inform
+          severity: low
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
