@@ -48,6 +48,8 @@ sudo dnf install -y nfs-utils || sudo yum install -y nfs-utils || sudo apt-get i
 sudo mkdir -p "${NFS_EXPORT_PATH}"
 echo "${NFS_EXPORT_PATH} *(rw,sync,no_subtree_check)" | sudo tee -a /etc/exports
 sudo exportfs -ra
+##### change permission to be usable by nfs provisioner pod
+chmod a+rwx ${NFS_EXPORT_PATH}
 
 # 3. Create the service account, cluster role, and cluster role binding
 cat <<EOF | oc apply -f -
