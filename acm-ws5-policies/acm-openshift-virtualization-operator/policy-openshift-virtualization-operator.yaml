@@ -61,7 +61,7 @@ spec:
                   name: kubevirt-hyperconverged
                   namespace: openshift-cnv
                 spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
 ---
 apiVersion: policy.open-cluster-management.io/v1
