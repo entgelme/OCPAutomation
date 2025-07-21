@@ -45,12 +45,12 @@
         state: present
       register: helm_repo_result
 
-    - name: Update Helm repositories
-      kubernetes.core.helm_repository:
-        name: rook-ceph
-        repo_url: "https://charts.rook.io/release"
-        state: present
-      changed_when: "'already exists' not in helm_repo_result.msg"
+    # - name: Update Helm repositories
+    #   kubernetes.core.helm_repository:
+    #     name: rook-ceph
+    #     repo_url: "https://charts.rook.io/release"
+    #     state: present
+    #   changed_when: "'already exists' not in helm_repo_result.msg"
 
     - name: Install Rook Ceph operator using Helm
       kubernetes.core.helm:
