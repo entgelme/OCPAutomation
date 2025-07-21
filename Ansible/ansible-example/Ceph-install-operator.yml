@@ -36,7 +36,9 @@
     #     src: /path/to/rook-ceph/cluster/examples/kubernetes/ceph/object-store.yaml
     #   register: object_store
 
-
+    - name: Login to Hub cluster
+      shell: echo "y" | oc login -u kubeadmin -p {{ ocpw }} --server={{ ocp_api_url }} --insecure-skip-tls-verify=true
+      no_log: true
 
     - name: Add Rook Helm repository
       kubernetes.core.helm_repository:
@@ -56,7 +58,6 @@
       kubernetes.core.helm:
         name: rook-ceph
         chart_ref: rook-release/rook-ceph
-        #rook-ceph/rook-ceph-operator
         release_namespace: rook-ceph
         create_namespace: true
         values:
@@ -67,4 +68,16 @@
           #   ...
         state: present
 
+    # Show result
+    - name: Show Ceph release in namespace
+      shell: helm ls --namespace rook-ceph
 
+
+    - name: Install Rook Ceph cluster CRD using Helm
+      kubernetes.core.helm:
+        name: rook-ceph-cluster
+        chart_ref: rook-release/rook-ceph-cluster
+        release_namespace: rook-ceph
+        values_files:
+          - ./files/rook-ceph-cluster-values.yaml
+        state: present
