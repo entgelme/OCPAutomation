@@ -11,8 +11,12 @@
       debug:
         msg: "Tasks to configure OCP cluster {{ ocp_api }} for: {{ test }}"
 
-# copy and execute setup-local-nfs.sh toat  "API" node /root 
+    # copy and execute setup-local-nfs.sh toat  "API" node /root 
     - name: "Transfer and execute setup-local-nfs.sh at the 'API' node"
       script: ./files/setup-local-nfs.sh
-          
+
+#     patch annotation in Storage class:
+#metadata:
+#  annotations:
+#    storageclass.kubernetes.io/is-default-class: 'true'
 
