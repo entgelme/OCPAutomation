@@ -1,6 +1,7 @@
 ---
 - name: Deploy Rook Ceph Operator
   hosts: bastion
+  connection: local
   gather_facts: false
 
   vars:
