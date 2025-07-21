@@ -54,8 +54,9 @@
 
     - name: Install Rook Ceph operator using Helm
       kubernetes.core.helm:
-        name: rook-ceph-operator
-        chart_ref: rook-ceph/rook-ceph-operator
+        name: rook-ceph
+        chart_ref: rook-release/rook-ceph
+        #rook-ceph/rook-ceph-operator
         release_namespace: rook-ceph
         create_namespace: true
         values:
