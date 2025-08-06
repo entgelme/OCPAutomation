@@ -11,8 +11,8 @@ metadata:
     policy.open-cluster-management.io/standards: NIST SP 800-53
   name: policy-odf-operator
 spec:
-  disabled: false
-#  remediationAction: inform
+  disabled: true
+  remediationAction: inform
   policy-templates:
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
@@ -100,7 +100,7 @@ spec:
                     preparePlacement: {}
                     replica: 3
                     resources: {}
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
 ---
 apiVersion: policy.open-cluster-management.io/v1
@@ -108,7 +108,7 @@ kind: PlacementBinding
 metadata:
   name: binding-policy-odf-operator
 placementRef:
-  name: hub-cluster
+  name: test-clusters
   kind: Placement
   apiGroup: cluster.open-cluster-management.io 
 subjects:
